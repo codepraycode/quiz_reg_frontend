@@ -1,10 +1,12 @@
 import React from 'react';
+import LoginForm from '../components/login_form';
 
-const Login = () => {
+
+const Login = (props) => {
     return (
-        <div>
-            Login
-        </div>
+        <>
+            <LoginForm {...props}/>
+        </>
     );
 };
 

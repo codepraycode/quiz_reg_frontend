@@ -1,0 +1,57 @@
+.mycontainer {
+    &:not(.sign_in_mode) {
+        .panel {
+            &.left_panel {
+                img,
+                .content {
+                    transform: translateX(0%);
+                }
+            }
+            &.right_panel {
+                z-index: -9;
+                img,
+                .content {
+                    transform: translateX(800px);
+                }
+            }
+        }
+        .form_container {
+            z-index: 15;
+        }
+    }
+    &.sign_in_mode {
+        &::before {
+            transform: translate(100%, -50%);
+            right: 52%;
+        }
+        .panel {
+            &.left_panel {
+                pointer-events: none;
+                img,
+                .content {
+                    transform: translateX(-100%);
+                }
+            }
+            &.right_panel {
+                pointer-events: all;
+                img,
+                .content {
+                    transform: translateX(0%);
+                }
+            }
+        }
+        .form_container {
+            left: 25%;
+            // form {
+            //     .sign_in_form {
+            //         opacity: 1;
+            //         z-index: 2;
+            //     }
+            //     .registration_form {
+            //         opacity: 0;
+            //         z-index: 1;
+            //     }
+            // }
+        }
+    }
+}
