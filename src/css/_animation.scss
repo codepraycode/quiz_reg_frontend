@@ -55,3 +55,44 @@
         }
     }
 }
+
+@media (max-width: 870px) {
+    .mycontainer {
+        &.sign_in_mode {
+            &:before {
+                transform: translate(-50%, 100%);
+                bottom: 32%;
+                right: initial;
+            }
+            .panel {
+                &.left_panel {
+                    img,
+                    .content {
+                        transform: translateY(-300px);
+                    }
+                }
+                &.right_panel {
+                    img,
+                    .content {
+                        transform: translateY(0px);
+                    }
+                }
+            }
+            .form_container {
+                top: 5%;
+                transform: translate(-115%, 0%) !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 570px) {
+    .mycontainer {
+        &.sign-up-mode {
+            &:before {
+                bottom: 28%;
+                left: 50%;
+            }
+        }
+    }
+}
