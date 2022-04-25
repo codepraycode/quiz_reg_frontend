@@ -6,7 +6,7 @@ const LoginForm = (props) => {
                 <h2 className="title"> Region Sign in</h2>
                 <span className="err text-danger"></span>
                 <div className="input_field">
-                    <i className="fas fa-user"></i>
+                    <i className="fa fa-envelope" aria-hidden="true"></i>
                     <input type="email" placeholder="Region Email" />
                     
                 </div>
