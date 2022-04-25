@@ -88,10 +88,14 @@
 
 @media (max-width: 570px) {
     .mycontainer {
-        &.sign-up-mode {
+        &.sign_in_mode {
             &:before {
                 bottom: 28%;
                 left: 50%;
+            }
+            .form_container {
+                top: 10% !important;
+                transform: translate(-100%, 0%) !important;
             }
         }
     }
