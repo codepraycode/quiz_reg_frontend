@@ -144,6 +144,13 @@ form {
             }
         }
     }
+    .err {
+        display: inline-block;
+        //margin-left: 15px;
+        font-weight: bold;
+        font-size: 12px;
+        // width: 100%;
+    }
 }
 
 .btn {

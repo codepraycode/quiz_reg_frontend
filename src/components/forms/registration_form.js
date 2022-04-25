@@ -2,12 +2,13 @@ import React from 'react';
 
 const RegistrationForm = () => {
     return (
-        <form className="registration_form">
+        <form className="registration_form" onSubmit={(e)=>{e.preventDefault();}}>
                 <h2 className="title">Registration</h2>
                 
                 <div className="input_field">
                     <i className="fas fa-user"></i>
                     <input type="text" placeholder="Username" />
+                    
                 </div>
                 
                 <div className="input_field">
