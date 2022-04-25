@@ -1,21 +1,23 @@
 import React from 'react';
 
-const LoginForm = () => {
+const RegistrationForm = () => {
     return (
-        <form className="sign_in_form">
-                <h2 className="title">Sign in</h2>
+        <form className="registration_form">
+                <h2 className="title">Registration</h2>
                 
-                <div className="input-field">
+                <div className="input_field">
                     <i className="fas fa-user"></i>
                     <input type="text" placeholder="Username" />
                 </div>
                 
-                <div className="input-field">
+                <div className="input_field">
                     <i className="fas fa-lock"></i>
                     <input type="password" placeholder="Password" />
                 </div>
                 
-                <input type="submit" value="Login" className="btn solid" />
+                <button type="submit" value="Login" className="btn solid">
+                    Submit
+                    </button>
                 
             </form>
         
@@ -23,4 +25,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default RegistrationForm;
