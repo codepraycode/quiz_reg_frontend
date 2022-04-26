@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import LoginForm from '../components/forms/login_form';
 import {REGION_LOGIN} from '../config';
 import axios from 'axios';
@@ -56,6 +56,16 @@ const Login = (props) => {
 
         });
     }
+
+    useEffect(() => {
+    document.title = "Region Login | Quiz Registration"
+
+    return () => {
+      //your cleanup code codes here
+      document.title = "Quiz Registration"
+    };
+
+  }, [])
 
     return (
         <>
