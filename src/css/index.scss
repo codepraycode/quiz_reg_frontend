@@ -153,6 +153,79 @@ form {
     }
 }
 
+.registration_form {
+    text-align: center;
+    position: relative;
+    width: 88%;
+    border-radius: 8px;
+    .title {
+        margin-bottom: 30px;
+    }
+    .progressbar {
+        width: 100%;
+        display: flex;
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: lightgrey;
+        .active {
+            color: #000000;
+            &::after,
+            &::before {
+                background: skyblue;
+            }
+        }
+        li {
+            display: inline-block;
+            list-style-type: none;
+            font-size: 12px;
+            width: 25%;
+            position: relative;
+            z-index: 0;
+            &::after,
+            &::before {
+                background: lightgray;
+            }
+            &::after {
+                content: '';
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                left: 0;
+                top: 25px;
+                z-index: -1;
+            }
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: ''; //attr(data-icon);
+                position: relative;
+                width: 50px;
+                height: 50px;
+                line-height: 45px;
+                display: block;
+                font-size: 18px;
+                color: #ffffff;
+                background: lightgray;
+                border-radius: 50%;
+                margin: 0 auto 10px auto;
+                padding: 2px;
+            }
+            &#pr::before {
+                content: '\f007';
+            }
+            &#tr::before {
+                content: '\f126';
+            }
+            &#qz::before {
+                content: '\f233';
+            }
+            &#sm::before {
+                content: '\f4fd';
+            }
+        }
+    }
+}
+
 .btn {
     width: 150px;
     background-color: #5995fd;
@@ -237,6 +310,11 @@ form {
         width: 110px;
         height: 35px;
         font-size: 0.7rem;
+    }
+    .registration_form {
+        strong {
+            display: none;
+        }
     }
 }
 
