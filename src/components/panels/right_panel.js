@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RightPanel = () => {
+const RightPanel = ({signOut}) => {
     return (
         <div className="panel right_panel">
             <div className="content">
@@ -8,7 +8,10 @@ const RightPanel = () => {
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
                 </p>
-               
+
+               <button className="btn transparent" onClick={()=>{signOut()}}>
+                    Sign Out
+                </button>
             </div>
             
             
