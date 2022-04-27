@@ -152,14 +152,69 @@ const RegistrationForm = () => {
     }
 
     const renderButton =()=>{
+        const previous = (
+            <Button color="primary" type="button" className="mr-5" onClick={
+                ()=>{
+                    setState({...state,current_phase:state.current_phase-1})}}
+                    >
+                    Previous
+                </Button>
+            
+        )
+
+        const next_ = (
+            <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
+                    Next
+                </Button>
+            
+        )
+
+         const submit = (
+        <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
+                    Submit
+                </Button>)
+        
+        const refresh = (
+        <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:1})}}>
+                    New
+                </Button>
+            
+        )
+
+        let template = null;
+        let current = state.current_phase;
+        let max = state.steps.length;
+
+        if(current <= 1){
+            template = (
+                <>
+                    {next_}
+                </>
+            )
+        }
+        else if(current > 1 && current <= max){
+            template = (
+                <>
+                    {previous}
+                    { current === max ? submit :next_}
+                </>
+            )
+        }
+        
+        else{
+            template = (
+                <>
+                    {refresh}
+                </>
+            )
+        }
         return (
             <div className="buttons">
-                <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
-          Submit
-        </Button>
+                {template}
             </div>
         )
     }
+
     return (
         <Form className="registration_form card px-0 pt-4 pb-0 mt-3 mb-3" onSubmit={(e)=>{e.preventDefault();}}>
             
