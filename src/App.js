@@ -5,6 +5,8 @@ import RightPanel from './components/panels/right_panel';
 import './css/index.scss';
 import { useCookies } from 'react-cookie';
 
+import CustomErrorBoundary from './components/errors';
+
 function App() {
   
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
@@ -44,19 +46,22 @@ function App() {
 
     
   }
+  
 
   return (
-    <div className={`mycontainer ${state.isLogin ? 'sign_in_mode':''}`}>
-      <div className="forms_container">
-        <Views switchMode={SwitchMode} loggedIn={state.isLogin}/>
-      </div>
+    <CustomErrorBoundary>
+      <div className={`mycontainer ${state.isLogin ? 'sign_in_mode':''}`}>
+        <div className="forms_container">
+          <Views switchMode={SwitchMode} loggedIn={state.isLogin}/>
+        </div>
 
-      <div className="panels_container">
-        <LeftPanel/>
-        <RightPanel signOut={handleSignOut}/>
+        <div className="panels_container">
+          <LeftPanel/>
+          <RightPanel signOut={handleSignOut}/>
+        </div>
+      
       </div>
-     
-    </div>
+    </CustomErrorBoundary>
   );
 }
 
