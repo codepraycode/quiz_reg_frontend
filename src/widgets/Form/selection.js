@@ -12,7 +12,7 @@ import { reprTxt } from '../utils';
 const RadioBox = ({inputhandler,...config})=>{
     // let {type,url, ...rest} = config;
     
-    let {name,value,err,key,options} = config;
+    let {name,err,key,options} = config;
     let verbose = reprTxt(name,'_');
 
     let template = [] 
@@ -26,7 +26,7 @@ const RadioBox = ({inputhandler,...config})=>{
                             // defaultValue="option1"
                             id={name}
                             name={name}
-                            value={value}
+                            value={each}
                             type="radio"
                             onChange={inputhandler}
                         />
@@ -58,9 +58,9 @@ const CheckBox = ({inputhandler,...config})=>{
     let template = [] 
     
     if(options){
-        template = options.map((each)=>{
+        template = options.map((each,i)=>{
             return (
-                <FormGroup check className="form-check-radio" inline>
+                <FormGroup key={i} check className="form-check-radio" inline>
                     <Label check>
                         <Input
                             defaultValue="option1"
@@ -101,32 +101,35 @@ const Selelction = ({inputhandler,...config})=>{
     let {name,value, options, err,key,} = config;
     let verbose = reprTxt(name,'_');
 
-    let template = [] 
-    
-    if(options){
-        template = options.map((each)=>{
+    let template_options = options.map((each, i)=>{
             return (
-                <>
-                    <Input
+                
+                   
+    <option key={i}>{each}</option>
+                
+            )
+        });
+
+    
+    
+    let template =  <Input
                     className="form-control-lg" 
                     type="select"
                     id={name}
                     name={name}
                     value={value}
                     onChange={inputhandler}
+                    
                 >
-                    <option>{each}</option>
+                    <option key="-1283">----</option>
+                    {template_options}
                 </Input>
-    
-                </>
-            )
-        })
-    }
     
 
     return (
-        <FormGroup key={key}>
+        <FormGroup key={key} >
             <label>{verbose}</label>
+
             {template}
             <FormText className="ml-2 text-danger err" color="default" >
                 {err}

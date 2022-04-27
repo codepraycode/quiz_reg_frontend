@@ -9,6 +9,7 @@ const participants_data_config = {
     passport: {
         type: 'image',
         value: '',
+        file: '',
         url: '',
         required: true,
     },

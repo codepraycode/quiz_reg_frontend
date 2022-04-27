@@ -44,7 +44,52 @@ const RegistrationForm = () => {
         },
         current_phase:1
         
-    })
+    });
+
+
+    const handleInput = (e)=>{
+        let field_type = e.target.type;
+        let field_name = e.target.name;
+        let field_value = e.target.value;
+
+        // console.log(field_type,field_name,field_value);
+
+        let formData = state.form_config.formData;
+
+        if(!formData[field_name]) return;
+
+        if(field_type === 'file'){
+            let d_file = e.target.files[0];
+            let url = URL.createObjectURL(d_file);
+
+            formData[field_name].file = d_file;
+            formData[field_name].url = url;
+
+        }
+        
+        else{
+            if(!['radio','checkbox'].includes(field_type)){
+                // console.log(field_name,field_value)
+                e.preventDefault();
+            }
+            
+            formData[field_name].value = field_value;
+
+        }
+
+
+        setState({
+            ...state,
+            form_config:{
+                ...state.form_config,
+                formData,
+            }
+        })
+
+
+        
+
+    }
     
 
    const renderProgress = ()=>{
@@ -96,7 +141,7 @@ const RegistrationForm = () => {
 
             if(!d_config) return []
 
-            return FormIt({name:each, ...d_config, key, inputhandler:()=>{}})
+            return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event) })
         })
 
         

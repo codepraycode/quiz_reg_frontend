@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{createRef} from 'react';
 import {
   
   FormGroup,
@@ -10,17 +10,33 @@ import {reprTxt} from "../utils";
 
 const ImageUpload = ({inputhandler,...config})=>{
     // let {type,url, ...rest} = config;
+    let {name,key,err,url} = config;
+    // let verbose = reprTxt(name,'_');
+
+    const imgInput = createRef();
     
      let template = (
-        <div className="file_upload center" key={config.key}>
+        <div className="file_upload center" key={key}>
 
             <div className="image_upload">
                 <div className="image">
-                    <img src="/assets/img/img_placeholder.svg" alt="preview" className='img-rounded'/>
+                    <img 
+                        src={url}
+                        alt="preview" 
+                        className='img-rounded'
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src="/assets/img/img_placeholder.svg";
+                        }}
+                    />
                 </div>
 
-                <span><i className="fas fa-solid fa-pen"></i></span>
+                <input name={name} onChange={inputhandler} accept=".jpg, .png, .jpeg" type="file" ref={imgInput} />
+
+                <span onClick={()=>{imgInput.current.click()}}><i className="fas fa-solid fa-pen"></i></span>
             </div>
+
+            <span className="err text-danger">{err}</span>
 
             
         </div>
