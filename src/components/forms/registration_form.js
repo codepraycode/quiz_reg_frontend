@@ -32,8 +32,7 @@ import FormIt from '../../widgets/Form';
     */
 const RegistrationForm = () => {
     const [state,setState] = useState({
-        form_config:{
-            formData:{
+        formData:{
             ...participants_data_config
             },
             steps:[
@@ -41,7 +40,6 @@ const RegistrationForm = () => {
                 ['region','province','zone','area','parish'],
                 ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
             ],
-        },
         current_phase:1
         
     });
@@ -54,7 +52,7 @@ const RegistrationForm = () => {
 
         // console.log(field_type,field_name,field_value);
 
-        let formData = state.form_config.formData;
+        let formData = state.formData;
 
         if(!formData[field_name]) return;
 
@@ -98,8 +96,8 @@ const RegistrationForm = () => {
         if(d_phase< 1){
             d_phase = 1
         }
-        // else if(d_phase > state.form_config.steps.length){
-        //     d_phase = state.form_config.steps.length;
+        // else if(d_phase > state.steps.length){
+        //     d_phase = state.steps.length;
         // }
 
        return (
@@ -128,16 +126,16 @@ const RegistrationForm = () => {
         if(d_phase< 1){
             d_phase = 1
         }
-        else if(d_phase > state.form_config.steps.length){
+        else if(d_phase > state.steps.length){
             return (
                 <p>Summary</p>
             )
         }
 
-        let step = state.form_config.steps[d_phase - 1];
+        let step = state.steps[d_phase - 1];
 
         let template_configs = step.flatMap((each,key)=>{
-            let d_config = state.form_config.formData[each];
+            let d_config = state.formData[each];
 
             if(!d_config) return []
 
