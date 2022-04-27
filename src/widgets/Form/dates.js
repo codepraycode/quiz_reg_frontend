@@ -8,8 +8,8 @@ import {
 } from "reactstrap";
 import {reprTxt} from "../utils";
 
-const TextInput = ({inputhandler,...config})=>{
-    let {name,err,key,...rest} = config;
+const Dates = ({inputhandler,...config})=>{
+    let {name,err,key,ordinary,...rest} = config;
     let verbose = reprTxt(name,'_');
 
     let template = (
@@ -36,4 +36,4 @@ const TextInput = ({inputhandler,...config})=>{
 
 }
 
-export default TextInput;
+export default Dates;

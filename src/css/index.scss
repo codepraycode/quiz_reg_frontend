@@ -40,7 +40,6 @@ input {
     z-index: 9;
     .form_container {
         position: absolute;
-        // background: red;
         top: 50%;
         transform: translate(-50%, -50%);
         left: 75%;
@@ -50,6 +49,7 @@ input {
         grid-template-columns: 1fr;
         // z-index: 5;
         form {
+            margin: 1px auto;
             display: flex;
             align-items: center;
             justify-content: center;

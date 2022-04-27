@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   Form,
   Button
@@ -31,38 +31,72 @@ import FormIt from '../../widgets/Form';
 
     */
 const RegistrationForm = () => {
-    const form_config = {
-        formData:{
-           ...participants_data_config
+    const [state,setState] = useState({
+        form_config:{
+            formData:{
+            ...participants_data_config
+            },
+            steps:[
+                ['passport','first_name','last_name','other_name','gender','date_of_birth'],
+                ['region','province','zone','area','parish'],
+                ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
+            ],
         },
-        steps:[
-            ['passport','first_name','last_name','other_name','gender','date_of_birth'],
-            ['region','province','zone','area','parish'],
-            ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
-        ]
-    }
+        current_phase:1
+        
+    })
+    
 
    const renderProgress = ()=>{
+       let d_phase = state.current_phase;
+        
+        if(d_phase< 1){
+            d_phase = 1
+        }
+        // else if(d_phase > state.form_config.steps.length){
+        //     d_phase = state.form_config.steps.length;
+        // }
+
        return (
            <ul className="progressbar">
-                <li className="active" id="pr">
-                    <strong>Participant Information</strong></li>
-                <li  id="tr"><strong>Parish Tree</strong></li>
-                <li id="qz"><strong>Quiz Setup</strong></li>
-                <li id="sm"><strong>Summary</strong></li>
+                <li 
+                    className={`${d_phase >= 1 ? "active":''}`}
+                    id="pr"
+                >
+                    <strong>Participant Information</strong>
+                </li>
+
+                <li className={`${d_phase >= 2 ? "active":''}`} id="tr">
+                    <strong>Parish Tree</strong>
+                </li>
+                <li className={`${d_phase >= 3 ? "active":''}`} id="qz"><strong>Quiz Setup</strong></li>
+                <li className={`${d_phase >= 4 ? "active":''}`} id="sm"><strong>Summary</strong></li>
             </ul>
        )
    }
 
+   
+
     const renderFormContent = ()=>{
-        let step = form_config.steps[0];
+        let d_phase = state.current_phase;
+        
+        if(d_phase< 1){
+            d_phase = 1
+        }
+        else if(d_phase > state.form_config.steps.length){
+            return (
+                <p>Summary</p>
+            )
+        }
+
+        let step = state.form_config.steps[d_phase - 1];
 
         let template_configs = step.flatMap((each,key)=>{
-            let d_config = form_config.formData[each];
+            let d_config = state.form_config.formData[each];
 
             if(!d_config) return []
 
-            return FormIt({name:each, ...d_config, key})
+            return FormIt({name:each, ...d_config, key, inputhandler:()=>{}})
         })
 
         
@@ -77,7 +111,7 @@ const RegistrationForm = () => {
     const renderButton =()=>{
         return (
             <div className="buttons">
-                <Button color="primary" type="button">
+                <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
           Submit
         </Button>
             </div>
@@ -93,6 +127,7 @@ const RegistrationForm = () => {
                 <>
                    {renderProgress()}
                 </>
+                
 
                 {renderFormContent()}
 

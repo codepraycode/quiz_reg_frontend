@@ -10,95 +10,98 @@ const participants_data_config = {
         type: 'image',
         value: '',
         url: '',
-        require: true,
+        required: true,
     },
     first_name: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     last_name: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     other_name: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     gender: {
         type: 'radio',
         value: '',
         options: ['male', 'female'],
-        require: true,
+        required: true,
     },
-    date: {
+    date_of_birth: {
         type: 'date',
         value: '',
-        require: true,
+        required: true,
         ordinary: false
     },
     region: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
         readOnly: true
     },
     province: {
-        type: 'option',
+        type: 'select',
         value: '',
-        require: true,
+        options: ['one'],
+        required: true,
         fetchUrl: ''
     },
     zone: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     area: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     parish: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     participant_category: {
-        type: 'option',
+        type: 'select',
         value: '',
-        require: true,
+        options: ['one'],
+        required: true,
         fetchUrl: ''
     },
     quiz_category: {
-        type: 'option',
+        type: 'select',
         value: '',
-        require: true,
+        options: ['one'],
+        required: true,
         fetchUrl: ''
     },
     birth_certificate: {
         type: 'file',
         value: '',
         url: '',
-        require: true,
+        required: true,
     },
     letter_of_recommendation: {
         type: 'file',
         value: '',
         url: '',
-        require: true,
+        required: true,
     },
     regional_coordinator: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
     provincial_coordinator: {
         type: 'text',
         value: '',
-        require: true,
+        required: true,
     },
 }
 module.exports = {

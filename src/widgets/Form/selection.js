@@ -18,16 +18,17 @@ const RadioBox = ({inputhandler,...config})=>{
     let template = [] 
     
     if(options){
-        template = options.map((each)=>{
+        template = options.map((each,i)=>{
             return (
-                <FormGroup check className="form-check-radio" inline>
+                <FormGroup key={i} check className="form-check-radio" inline>
                     <Label check>
                         <Input
-                            defaultValue="option1"
+                            // defaultValue="option1"
                             id={name}
                             name={name}
                             value={value}
                             type="radio"
+                            onChange={inputhandler}
                         />
                         {each}
                         <span className="form-check-sign"></span>
@@ -67,6 +68,7 @@ const CheckBox = ({inputhandler,...config})=>{
                             name={name}
                             value={value}
                             type="checkbox"
+                            onChange={inputhandler}
                         ></Input>
                         {each}{" "}
                         <span className="form-check-sign">
@@ -91,6 +93,48 @@ const CheckBox = ({inputhandler,...config})=>{
 
 }
 
+
+
+const Selelction = ({inputhandler,...config})=>{
+    // let {type,url, ...rest} = config;
+    
+    let {name,value, options, err,key,} = config;
+    let verbose = reprTxt(name,'_');
+
+    let template = [] 
+    
+    if(options){
+        template = options.map((each)=>{
+            return (
+                <>
+                    <Input
+                    className="form-control-lg" 
+                    type="select"
+                    id={name}
+                    name={name}
+                    value={value}
+                    onChange={inputhandler}
+                >
+                    <option>{each}</option>
+                </Input>
+    
+                </>
+            )
+        })
+    }
+    
+
+    return (
+        <FormGroup key={key}>
+            <label>{verbose}</label>
+            {template}
+            <FormText className="ml-2 text-danger err" color="default" >
+                {err}
+            </FormText>
+        </FormGroup>
+    );
+
+}
 const selectWidget = (kind, config)=>{
     if(kind === 'radio'){
         return RadioBox(config);
@@ -98,6 +142,10 @@ const selectWidget = (kind, config)=>{
 
     if(kind === 'check'){
         return CheckBox(config);
+    }
+
+    if(kind === 'select'){
+        return Selelction(config)
     }
 
     return null;
