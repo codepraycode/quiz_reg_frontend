@@ -18,6 +18,9 @@
         .form_container {
             z-index: 15;
         }
+        .forms_container {
+            z-index: 12;
+        }
     }
     &:not(.sign_in_mode) {
         &::before {
@@ -46,11 +49,58 @@
     }
 }
 
+@keyframes sign_up_slidee {
+    0% {
+        z-index: 15;
+        // transform: translate(-20%, 20%);
+    }
+    25% {
+        transform: translate(-20%, 20%);
+    }
+    50% {
+        transform: translate(-20%, -65%);
+    }
+    75% {
+        z-index: 10;
+    }
+    100% {
+        transform: translate(-20%, -60%);
+    }
+}
+
+@keyframes sign_down_slidee {
+    0% {
+        z-index: 25;
+        // transform: translate(-20%, 20%);
+    }
+    25% {
+        transform: translate(-20%, 20%);
+    }
+    50% {
+        transform: translate(-20%, 40%);
+    }
+    // 75% {
+    //     z-index: 10;
+    // }
+    75% {
+        transform: translate(-20%, 65%);
+    }
+    100% {
+        z-index: 10;
+    }
+}
+
 @media (max-width: 870px) {
     .app_container {
         position: relative;
         overflow: auto;
         padding: 0;
+        // &::before {
+        //     position: fixed;
+        //     height: 100%; // 300px;
+        //     width: 200%;
+        //     z-index: 15;
+        // }
         .forms_container {
             position: relative;
             display: block !important;
@@ -94,23 +144,30 @@
         &:not(.sign_in_mode) {
             &::before {
                 position: fixed;
-                bottom: -10%;
-                left: 10%;
-                transform: translate(0%, 0%);
-                height: 400px;
-                width: 1000px;
-                // right: 52%;
+                top: 0%;
+                left: 0%;
+                height: 100%; // 300px;
+                width: 200%;
+                // transform: translate(-25%, 47%);
+                animation: slidsign_down_slideeee 1.3s ease;
+                transform: translate(-20%, 60%);
+                // z-index: 15;
             }
         }
         &.sign_in_mode {
             &::before {
                 position: fixed;
-                top: -10%;
-                left: -100%;
-                transform: translate(0%, 0%);
-                height: 300px;
-                width: 1000px;
+                top: 0%;
+                left: 0%;
+                height: 100%; // 300px;
+                width: 200%;
+                // transform: translate(-20%, -60%);
+                // animation: sign_up_slidee 5.3s ease;
+                animation: sign_up_slidee ease 1.3s;
+                transform: translate(-20%, -60%);
+                // transform: translate(-50%, -50%);
                 // right: 52%;
+                // z-index: 15;
             }
             .panels_container {
                 .footer {
@@ -120,47 +177,31 @@
                     display: block;
                 }
             }
-            .form_container {
-                z-index: 15;
-                .forms_container {
-                    margin-top: 300px;
-                    border-radius: 10px;
+            .forms_container {
+                .form_container {
+                    // margin-top: 500px;
+                    margin: 0px;
+                    transform: translate(0%, 100%);
+                    border-radius: 20px;
                 }
             }
         }
     }
 }
 
-// @media (max-width: 570px) {
-//     .app_container {
-//         &:not(.sign_in_mode) {
-//             .forms_container {
-//                 // margin-bottom: 350px;
-//             }
-//         }
-//         // &.sign_in_mode {
-//         //     .panels_container {
-//         //         overflow: hidden !important;
-//         //     }
-//         //     .forms_container {
-//         //         // height: fit-content !important;
-//         //         // margin: 0px;
-//         //         // transform: translate(0%, 100%);
-//         //         // .form_container {
-//         //         //     margin: 0;
-//         //         // }
-//         //         // overflow: hidden;
-//         //     }
-//         // }
-//     }
-// }
-// @media (max-width: 410px) {
-//     .app_container {
-//         &.sign_in_mode {
-//             .forms_container {
-//                 // height: fit-content !important;
-//                 margin-top: 200px;
-//             }
-//         }
-//     }
-// }
+@media (max-width: 570px) {
+    .app_container {
+        h3,
+        .title {
+            font-size: 25px;
+        }
+        &.sign_in_mode {
+            .panels_container {
+                overflow: hidden !important;
+            }
+            .forms_container {
+                transform: translate(0%, 100%);
+            }
+        }
+    }
+}
