@@ -276,6 +276,24 @@ form {
             font-size: 10px;
         }
     }
+    .success {
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        margin: 25px auto;
+        h2 {
+            margin: 20px auto;
+            font-weight: bold;
+        }
+        .check {
+            display: block;
+            font-size: 10vw;
+            color: green;
+        }
+    }
 }
 
 .file_upload {
@@ -329,7 +347,7 @@ form {
 }
 
 .btn {
-    width: 150px;
+    min-width: 150px;
     background-color: #5995fd;
     border: none;
     outline: none;
@@ -416,6 +434,17 @@ form {
     .registration_form {
         strong {
             display: none;
+        }
+        .success {
+            width: 100%;
+            margin: 0px auto;
+            .check {
+                display: block;
+                font-size: 25vw !important;
+            }
+            h2 {
+                font-size: 18px;
+            }
         }
     }
 }

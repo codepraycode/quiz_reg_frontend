@@ -3,7 +3,7 @@ import {
   Form,
   Button
 } from "reactstrap";
-import { participants_data_config } from '../../config';
+import { participants_data_config,participants_data } from '../../config';
 import FormIt from '../../widgets/Form';
     /* 
         step 1:
@@ -31,17 +31,23 @@ import FormIt from '../../widgets/Form';
 
     */
 const RegistrationForm = () => {
-    
-    const [state,setState] = useState({
+    const initialState = {
         formData:{
+            ...participants_data,
+        },
+        form_config:{
             ...participants_data_config
-            },
+        },
         steps:[
             ['passport','first_name','last_name','other_name','gender','date_of_birth'],
             ['region','province','zone','area','parish'],
             ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
         ],
         current_phase:1
+    }
+
+    const [state,setState] = useState({
+        ...initialState
     });
 
 
@@ -59,12 +65,14 @@ const RegistrationForm = () => {
 
         if(!formData[field_name]) return;
 
+        let formConfig = state.form_config[field_name];
+
         if(field_type === 'file'){
             let d_file = e.target.files[0];
             let url = URL.createObjectURL(d_file);
 
-            formData[field_name].file = d_file;
-            formData[field_name].url = url;
+            formData[field_name].value = d_file;
+            formConfig[field_name].url = url;
 
         }
         
@@ -79,12 +87,9 @@ const RegistrationForm = () => {
         }
 
 
-        setState({
-            ...state,
-            form_config:{
-                ...state.form_config,
-                formData,
-            }
+        setState((prev_state)=>{
+            prev_state.formData = formData;
+            return {...prev_state}
         })
 
 
@@ -92,6 +97,44 @@ const RegistrationForm = () => {
 
     }
     
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        
+        let current_phase = state.current_phase;
+        let max = state.steps.length;
+
+        
+        if(current_phase <1 || (current_phase >= 1 && current_phase < max)){
+            current_phase += 1;
+            
+            setState((prev_state)=>{
+                    prev_state.current_phase = current_phase; 
+                    return {...prev_state}
+                }
+            )
+            return;
+        }
+        else if(current_phase === max){
+            let data = {}
+
+            Object.entries(state.formData).forEach(([field,config])=>{
+                data[field] = config.value;
+            })
+
+            console.log("Gathering Data", data);
+            current_phase +=1
+            setState((prev_state)=>{
+                    prev_state.current_phase = current_phase; 
+                    return {...prev_state}
+                    
+                }
+            )
+            return;
+        }
+
+        
+        
+    }
 
    const renderProgress = ()=>{
        let d_phase = state.current_phase;
@@ -118,6 +161,24 @@ const RegistrationForm = () => {
             </ul>
        )
    }
+   const renderSummary = ()=>{
+       return(
+           <>
+                <div className="success card">
+                    <h2>Participant Registration Successful</h2>
+                    <span className="check">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    </span>
+                    {
+                    renderButton()
+                }   
+                </div>
+
+                
+           </>
+            
+       )
+   }
 
    
     const renderFormContent = ()=>{
@@ -128,56 +189,80 @@ const RegistrationForm = () => {
         }
         else if(d_phase > state.steps.length){
             return (
-                <p>Summary</p>
+                <>
+                   {renderSummary()}
+                </>
+                
             )
         }
 
         let step = state.steps[d_phase - 1];
 
         let template_configs = step.flatMap((each,key)=>{
-            let d_config = state.formData[each];
+            let d_config = state.form_config[each];
+            
 
             if(!d_config) return []
+            let value = state.formData[each].value
+            d_config.value = value;
 
             return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event) })
         })
 
         
         return(
+            <Form onSubmit={handleSubmit}>
             <fieldset className="card">
                 {template_configs}
                 
             </fieldset>
+
+            {
+                    renderButton()
+                }
+            </Form>
         )
     }
 
     const renderButton =()=>{
         const previous = (
-            <Button color="primary" type="button" className="mr-5" onClick={
-                ()=>{
-                    setState({...state,current_phase:state.current_phase-1})}}
-                    >
-                    Previous
-                </Button>
+            <Button 
+                color="primary" 
+                type="button" 
+                className="mr-5" 
+                onClick={()=>{setState((prev_state)=>{
+                    prev_state.current_phase -= 1; 
+                    // console.log(prev_state)
+                    return {...prev_state}
+                })}}
+            >
+                Previous
+            </Button>
             
         )
 
         const next_ = (
-            <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
+            <Button color="primary" type="submit">
                     Next
                 </Button>
             
         )
 
          const submit = (
-        <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:state.current_phase+1})}}>
+        <Button color="primary" type="submit">
                     Submit
                 </Button>)
         
         const refresh = (
-        <Button color="primary" type="button" onClick={()=>{setState({...state,current_phase:1})}}>
-                    New
-                </Button>
+        <Button 
+            color="primary" 
+            type="button" 
+            onClick={()=>{
+                window.location.reload()
+            }}
+        >
+            New Participant
+        </Button>
             
         )
 
@@ -202,12 +287,14 @@ const RegistrationForm = () => {
         }
         
         else{
+            // console.log("refresh")
             template = (
                 <>
                     {refresh}
                 </>
             )
         }
+
         return (
             <div className="buttons">
                 {template}
@@ -226,20 +313,8 @@ const RegistrationForm = () => {
                     {renderProgress()}
                 </>
             </div>
-            
+            {renderFormContent()}
 
-            <Form onSubmit={(e)=>{e.preventDefault();}}>
-
-                
-
-                {renderFormContent()}
-
-                {
-                    renderButton()
-                }
-
-                
-            </Form>
         </div>
         
         
