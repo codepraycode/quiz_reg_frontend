@@ -30,7 +30,7 @@ import FormIt from '../../widgets/Form';
             * summary and submit
 
     */
-const RegistrationForm = () => {
+const RegistrationForm = ({register}) => {
     const initialState = {
         formData:{
             ...participants_data,
@@ -47,7 +47,9 @@ const RegistrationForm = () => {
     }
 
     const [state,setState] = useState({
-        ...initialState
+        ...initialState,
+        loading:false,
+        err:null
     });
 
 
@@ -121,15 +123,30 @@ const RegistrationForm = () => {
                 data[field] = config.value;
             })
 
-            console.log("Gathering Data", data);
+            // console.log("Gathering Data", data);
             current_phase +=1
+
+            register(data,(err)=>{
+                setState((prev_state)=>{
+                        prev_state.current_phase = current_phase; 
+                        prev_state.loading = false;
+                        prev_state.err = err
+                        return {...prev_state}
+                        
+                    }
+                );
+            })
+
+
             setState((prev_state)=>{
-                    prev_state.current_phase = current_phase; 
+                    // prev_state.current_phase = current_phase; 
+                    prev_state.loading = true;
+                    prev_state.err = null
                     return {...prev_state}
                     
                 }
             )
-            return;
+            // return;
         }
 
         
@@ -167,7 +184,7 @@ const RegistrationForm = () => {
                 <div className="success card">
                     <h2>Participant Registration Successful</h2>
                     <span className="check">
-                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        <i className="fa fa-check-circle" aria-hidden="true"></i>
                     </span>
                     {
                     renderButton()
@@ -235,6 +252,7 @@ const RegistrationForm = () => {
                     // console.log(prev_state)
                     return {...prev_state}
                 })}}
+                disabled={state.loading}
             >
                 Previous
             </Button>
@@ -249,9 +267,13 @@ const RegistrationForm = () => {
         )
 
          const submit = (
-        <Button color="primary" type="submit">
-                    Submit
-                </Button>)
+        <Button 
+            color="primary" 
+            type="submit"
+            disabled={state.loading}
+        >
+            {state.loading ? 'Processing...' :'Submit'}
+        </Button>)
         
         const refresh = (
         <Button 
