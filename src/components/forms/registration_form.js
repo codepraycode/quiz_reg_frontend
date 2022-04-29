@@ -31,18 +31,21 @@ import FormIt from '../../widgets/Form';
 
     */
 const RegistrationForm = () => {
+    
     const [state,setState] = useState({
         formData:{
             ...participants_data_config
             },
-            steps:[
-                ['passport','first_name','last_name','other_name','gender','date_of_birth'],
-                ['region','province','zone','area','parish'],
-                ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
-            ],
+        steps:[
+            ['passport','first_name','last_name','other_name','gender','date_of_birth'],
+            ['region','province','zone','area','parish'],
+            ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
+        ],
         current_phase:1
-        
     });
+
+
+
 
 
     const handleInput = (e)=>{
@@ -96,9 +99,7 @@ const RegistrationForm = () => {
         if(d_phase< 1){
             d_phase = 1
         }
-        // else if(d_phase > state.steps.length){
-        //     d_phase = state.steps.length;
-        // }
+
 
        return (
            <ul className="progressbar">
@@ -119,7 +120,6 @@ const RegistrationForm = () => {
    }
 
    
-
     const renderFormContent = ()=>{
         let d_phase = state.current_phase;
         
@@ -216,15 +216,20 @@ const RegistrationForm = () => {
     }
 
     return (
-        <Form className="registration_form card px-0 pt-4 pb-0 mt-3 mb-3" onSubmit={(e)=>{e.preventDefault();}}>
-            
+        <div className="registration_form card px-0 pt-4 pb-0 mt-3 mb-3">
+            <div className="form_head">
                 <h2 className="title">
                     Registration
                 </h2>
-                
+                    
                 <>
-                   {renderProgress()}
+                    {renderProgress()}
                 </>
+            </div>
+            
+
+            <Form onSubmit={(e)=>{e.preventDefault();}}>
+
                 
 
                 {renderFormContent()}
@@ -235,6 +240,8 @@ const RegistrationForm = () => {
 
                 
             </Form>
+        </div>
+        
         
         
     );

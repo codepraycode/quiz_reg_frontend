@@ -12,7 +12,7 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
   const initialState = {
-    isLogin: cookies.auth ? true : false,
+    loggedIn: true,//cookies.auth ? true : false,
     authData:null
   }
   
@@ -27,7 +27,7 @@ function App() {
 
         return {
           ...prev_state,
-          isLogin:!state.isLogin,
+          loggedIn:!state.loggedIn,
           authData:auth_data
         }
       }
@@ -41,7 +41,7 @@ function App() {
     
     setState((prev_state)=>{
       removeCookie('auth');
-      return {...initialState, isLogin:false};
+      return {...initialState, loggedIn:false};
     })
 
     
@@ -50,9 +50,9 @@ function App() {
 
   return (
     <CustomErrorBoundary>
-      <div className={`mycontainer ${state.isLogin ? 'sign_in_mode':''}`}>
+      <div className={`app_container ${!state.loggedIn ? 'sign_in_mode':''}`}>
         <div className="forms_container">
-          <Views switchMode={SwitchMode} loggedIn={state.isLogin}/>
+          <Views switchMode={SwitchMode} loggedIn={state.loggedIn}/>
         </div>
 
         <div className="panels_container">
