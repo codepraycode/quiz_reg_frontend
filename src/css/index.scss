@@ -43,7 +43,6 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 9;
     .form_container {
         position: absolute;
         top: 50%;
@@ -77,6 +76,7 @@ body {
     left: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    z-index: 11;
     h3 {
         font-weight: 600;
         line-height: 1;
@@ -111,7 +111,7 @@ body {
         }
     }
     .footer {
-        background: $panelStyle;
+        // background: $panelStyle;
         max-height: 350px;
         width: 100%;
         z-index: 12;
@@ -123,10 +123,10 @@ body {
         position: absolute;
         top: 0;
         text-align: center;
-        background: greenyellow;
     }
     .header,
     .footer {
+        // z-index: 15 !important;
         display: none;
     }
 }
@@ -425,12 +425,12 @@ form {
         padding: 0 1.5rem;
         width: 90%;
     }
-    img {
-        display: none;
-    }
     .panel {
         .content {
             padding: 0.5rem 1rem;
+        }
+        img {
+            display: none;
         }
     }
     .app_container {
