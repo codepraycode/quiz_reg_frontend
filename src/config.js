@@ -1,7 +1,7 @@
 const URL = process.env.REACT_APP_SERVER_URL;
 
 const REGION_LOGIN = `${URL}/api/region/login`;
-
+const REGISTER = `${URL}/api/participant/create`;
 
 
 // Inputs
@@ -62,7 +62,6 @@ const participants_data = {
 const participants_data_config = {
     passport: {
         type: 'image',
-
         file: '',
         url: '',
         required: true,
@@ -162,5 +161,6 @@ const participants_data_config = {
 module.exports = {
     REGION_LOGIN,
     participants_data,
-    participants_data_config
+    participants_data_config,
+    REGISTER
 }

@@ -52,7 +52,7 @@ function App() {
     <CustomErrorBoundary>
       <div className={`app_container ${!state.loggedIn ? 'sign_in_mode':''}`}>
         <div className="forms_container">
-          <Views switchMode={SwitchMode} loggedIn={state.loggedIn}/>
+          <Views switchMode={SwitchMode} {...state}/>
         </div>
 
         <div className="panels_container">

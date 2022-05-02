@@ -18,7 +18,7 @@ const Login = (props) => {
             data : data
         }
 
-        props.switchMode({token:'ewr89u23'});
+        // props.switchMode({token:'ewr89u23'});
 
         axios(config)
         .then(response=>{

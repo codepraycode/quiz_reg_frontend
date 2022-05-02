@@ -67,9 +67,10 @@ const RegistrationForm = ({register}) => {
 
         if(!formData[field_name]) return;
 
-        let formConfig = state.form_config[field_name];
-
+        let formConfig = state.form_config;//[field_name];
+        // console.log(formConfig)
         if(field_type === 'file'){
+            
             let d_file = e.target.files[0];
             let url = URL.createObjectURL(d_file);
 
@@ -91,6 +92,7 @@ const RegistrationForm = ({register}) => {
 
         setState((prev_state)=>{
             prev_state.formData = formData;
+            prev_state.form_config = formConfig
             return {...prev_state}
         })
 
@@ -117,11 +119,12 @@ const RegistrationForm = ({register}) => {
             return;
         }
         else if(current_phase === max){
-            let data = {}
+            let data = new FormData()
 
             Object.entries(state.formData).forEach(([field,config])=>{
-                data[field] = config.value;
-            })
+                // data[field] = config.value;
+                data.append(field, config.value);
+            });
 
             // console.log("Gathering Data", data);
             current_phase +=1

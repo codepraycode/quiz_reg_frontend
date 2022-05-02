@@ -6,7 +6,8 @@ const LoginForm = (props) => {
     const [state,setState] = useState({
         email:'',
         password:'',
-        err:null
+        err:null,
+        loading:false
     });
 
 
@@ -25,7 +26,8 @@ const LoginForm = (props) => {
         props.login(data,(error)=>{
             setState({
                 ...state,
-                err:error
+                err:error,
+                loading:false
             });
             return;
         });
@@ -33,7 +35,8 @@ const LoginForm = (props) => {
 
         setState({
             ...state,
-            err:null
+            err:null,
+            loading:true
         })
     }
 
@@ -78,8 +81,13 @@ const LoginForm = (props) => {
                     
                 </div>
                 
-                <button type="submit" value="Login" className="btn solid">
-                    Login
+                <button 
+                    type="submit" 
+                    value="Login" 
+                    className="btn solid"
+                    disabled={state.loading}
+                >
+                    {state.loading ? 'Loading':'Login'}
                 </button>
                 
             </form>
