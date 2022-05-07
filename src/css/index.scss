@@ -188,9 +188,17 @@ form {
     border-radius: 8px;
     margin: 0 auto;
     overflow: auto;
-    .title {
-        text-align: center;
-        margin-bottom: 30px;
+    .form_head {
+        .title {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .err {
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            margin-bottom: 30px;
+        }
     }
     .progressbar {
         text-align: center;
@@ -204,6 +212,13 @@ form {
             &::after,
             &::before {
                 background: skyblue;
+            }
+        }
+        .error {
+            color: #FF3636;
+            &::after,
+            &::before {
+                background: #FF3636;
             }
         }
         li {

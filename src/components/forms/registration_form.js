@@ -49,7 +49,8 @@ const RegistrationForm = ({register}) => {
     const [state,setState] = useState({
         ...initialState,
         loading:false,
-        err:null
+        err:null // error will be an object of field to value
+        // server will return a field to value error
     });
 
 
@@ -158,29 +159,74 @@ const RegistrationForm = ({register}) => {
 
    const renderProgress = ()=>{
        let d_phase = state.current_phase;
-        
+       let error_index = 0;
+
         if(d_phase< 1){
             d_phase = 1
         }
 
+        let errors = state.err;
 
+       if(errors) {
+        //    let isEmpty = Object.keys(errors).length === 0;
+           let first_field = Object.keys(errors)[0]
+
+           if(first_field){
+               for(let i=0; i < state.steps.length; i++){
+                   let step = state.steps[i]
+
+                   if(step.includes(first_field)){
+                       error_index = i+1;
+                       break
+                   }
+               }
+           }
+       }
+
+
+       function getClassNames(index){
+           let classname = []
+
+           if(d_phase >= index){
+               
+               classname.push(error_index === index ? 'error':'active')
+           }
+
+
+           return classname.join(' ');
+       }
+       
+
+
+       console.log(error_index)
        return (
            <ul className="progressbar">
                 <li 
-                    className={`${d_phase >= 1 ? "active":''}`}
+                    className={getClassNames(1)}
                     id="pr"
                 >
                     <strong>Participant Information</strong>
                 </li>
 
-                <li className={`${d_phase >= 2 ? "active":''}`} id="tr">
+                <li 
+                className={getClassNames(2)}
+                 id="tr">
                     <strong>Parish Tree</strong>
                 </li>
-                <li className={`${d_phase >= 3 ? "active":''}`} id="qz"><strong>Quiz Setup</strong></li>
-                <li className={`${d_phase >= 4 ? "active":''}`} id="sm"><strong>Summary</strong></li>
+
+                <li 
+                    className={getClassNames(3)}
+                    id="qz">
+                        <strong>Quiz Setup</strong></li>
+
+                <li 
+                    className={getClassNames(4)}
+                    id="sm">
+                    <strong>Summary</strong></li>
             </ul>
        )
    }
+
    const renderSummary = ()=>{
        return(
            <>
@@ -198,6 +244,28 @@ const RegistrationForm = ({register}) => {
            </>
             
        )
+   }
+
+
+   const renderError = ()=>{
+       let errors = state.err;
+
+       if(!errors) return null 
+       
+       let isEmpty = Object.keys(errors).length === 0;
+
+        if(isEmpty) return null
+
+        // There are Values
+        
+        if(errors.message){
+            return errors.message
+        }
+
+        // get the first field
+        let first_field = Object.keys(errors)[0]
+
+        return errors[first_field]
    }
 
    
@@ -333,6 +401,8 @@ const RegistrationForm = ({register}) => {
                 <h2 className="title">
                     Registration
                 </h2>
+
+                <span className='err text-danger'>{renderError()}</span>
                     
                 <>
                     {renderProgress()}

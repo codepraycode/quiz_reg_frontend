@@ -12,7 +12,7 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
   const initialState = {
-    loggedIn: cookies.auth ? true : false,
+    loggedIn: true,//cookies.auth ? true : false,
     authData:null
   }
   
