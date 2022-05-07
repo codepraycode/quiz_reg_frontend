@@ -1,15 +1,29 @@
 // Colors
-$white:#fff;
+// $white:#fff;
 $lightblue:#4481eb;
 $cyan:#04befe;
 $test:rgb(99, 168, 99);
 $panelStyle:linear-gradient(-45deg, $lightblue 0%, $cyan 100%);
+@import './colors';
 // Font
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: $grey $lightgrey;
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+        background: $lightgrey;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey;
+        border-radius: 20px;
+        border: 3px solid $lightgrey;
+    }
 }
 
 body {

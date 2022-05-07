@@ -26,7 +26,7 @@ const ImageUpload = ({inputhandler,...config})=>{
                         className='img-rounded'
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null; // prevents looping
-                            currentTarget.src="/assets/img/img_placeholder.svg";
+                            currentTarget.src="/assets/img/user.jpg";
                         }}
                     />
                 </div>
