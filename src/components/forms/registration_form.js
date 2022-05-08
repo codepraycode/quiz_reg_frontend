@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 import {
   Form,
-  Button
 } from "reactstrap";
 import { participants_data_config,participants_data } from '../../config';
+import ButtonW from '../../widgets/buttons';
 import FormIt from '../../widgets/Form';
     /* 
         step 1:
@@ -62,14 +62,11 @@ const RegistrationForm = ({register}) => {
         let field_name = e.target.name;
         let field_value = e.target.value;
 
-        // console.log(field_type,field_name,field_value);
-
         let formData = state.formData;
 
         if(!formData[field_name]) return;
 
         let formConfig = state.form_config;//[field_name];
-        // console.log(formConfig)
         if(field_type === 'file'){
             
             let d_file = e.target.files[0];
@@ -82,7 +79,6 @@ const RegistrationForm = ({register}) => {
         
         else{
             if(!['radio','checkbox'].includes(field_type)){
-                // console.log(field_name,field_value)
                 e.preventDefault();
             }
             
@@ -120,23 +116,30 @@ const RegistrationForm = ({register}) => {
             return;
         }
         else if(current_phase === max){
-            let data = new FormData()
+            const considered_files = ['passport','birth_certificate','letter_of_recommendation'];
+
+            let data = {} //new FormData()
+            let files_data = new FormData();
 
             Object.entries(state.formData).forEach(([field,config])=>{
                 // data[field] = config.value;
-                data.append(field, config.value);
+                if(considered_files.includes(field)){
+                    files_data.append(field, config.value);
+                }else{
+                    data[field] = config.value;
+                } 
             });
 
-            // console.log("Gathering Data", data);
+            
             current_phase +=1
 
-            register(data,(err)=>{
+            register(data,files_data,(err)=>{
+
                 setState((prev_state)=>{
                         prev_state.current_phase = current_phase; 
                         prev_state.loading = false;
                         prev_state.err = err
                         return {...prev_state}
-                        
                     }
                 );
             })
@@ -196,9 +199,6 @@ const RegistrationForm = ({register}) => {
            return classname.join(' ');
        }
        
-
-
-       console.log(error_index)
        return (
            <ul className="progressbar">
                 <li 
@@ -314,49 +314,39 @@ const RegistrationForm = ({register}) => {
 
     const renderButton =()=>{
         const previous = (
-            <Button 
-                color="primary" 
-                type="button" 
-                className="mr-5" 
-                onClick={()=>{setState((prev_state)=>{
+            <ButtonW
+                type="previous"
+                func={()=>{setState((prev_state)=>{
                     prev_state.current_phase -= 1; 
-                    // console.log(prev_state)
+                   
                     return {...prev_state}
                 })}}
                 disabled={state.loading}
-            >
-                Previous
-            </Button>
+            />
             
         )
 
         const next_ = (
-            <Button color="primary" type="submit">
-                    Next
-                </Button>
+            <ButtonW 
+                type="next"
+            />
             
         )
 
-         const submit = (
-        <Button 
-            color="primary" 
-            type="submit"
-            disabled={state.loading}
-        >
-            {state.loading ? 'Processing...' :'Submit'}
-        </Button>)
+        const submit = (
+            <ButtonW
+                type="submit"
+                disable={state.loading}
+            />
+        )
         
         const refresh = (
-        <Button 
-            color="primary" 
-            type="button" 
-            onClick={()=>{
-                window.location.reload()
-            }}
-        >
-            New Participant
-        </Button>
-            
+            <ButtonW
+                type="refresh" 
+                func={()=>{
+                    window.location.reload()
+                }}
+            />
         )
 
         let template = null;
@@ -380,7 +370,7 @@ const RegistrationForm = ({register}) => {
         }
         
         else{
-            // console.log("refresh")
+
             template = (
                 <>
                     {refresh}

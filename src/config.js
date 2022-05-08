@@ -2,6 +2,7 @@ const URL = process.env.REACT_APP_SERVER_URL;
 
 const REGION_LOGIN = `${URL}/api/region/login`;
 const REGISTER = `${URL}/api/participant/create`;
+const PARTICIPANT = `${URL}/api/participant`;
 
 
 // Inputs
@@ -162,5 +163,6 @@ module.exports = {
     REGION_LOGIN,
     participants_data,
     participants_data_config,
-    REGISTER
+    REGISTER,
+    PARTICIPANT
 }
