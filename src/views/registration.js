@@ -45,6 +45,15 @@ const Registration = (props) => {
                 return
             }
             // if(err.)
+            if(response.status === 400){
+                let {data} = response;
+                // cb(data.message);  
+                // console.log(response)
+                rejected(data.message)
+                return
+            }
+
+            // console.log(response)
 
 
             // cb('Unable to Connect To Sever');
@@ -102,9 +111,13 @@ const Registration = (props) => {
           headers: { 
               'Content-Type': 'application/json', 
               // 'Content-Type': 'multipart/form-data',
-              'Cookie': `auth=${cookies.auth}`
+              // 'Cookie': `auth=${cookies.auth}`
           },
-          data : {...data}
+          data : {
+            ...data,
+            token:cookies.auth
+          }
+          // {...data}
           // {
           //   ...data,
           //   token:cookies.auth
@@ -133,6 +146,7 @@ const Registration = (props) => {
             return
           })
           .catch(err=>{
+            console.log("File Upload Error")
             cb({message:err})
             return
           })

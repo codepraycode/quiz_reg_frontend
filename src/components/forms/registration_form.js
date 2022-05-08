@@ -136,7 +136,10 @@ const RegistrationForm = ({register}) => {
             register(data,files_data,(err)=>{
 
                 setState((prev_state)=>{
-                        prev_state.current_phase = current_phase; 
+                        if(!err){
+                            prev_state.current_phase = current_phase; 
+                        }
+                        
                         prev_state.loading = false;
                         prev_state.err = err
                         return {...prev_state}
@@ -187,10 +190,13 @@ const RegistrationForm = ({register}) => {
        }
 
 
-       function getClassNames(index){
+       function getClassNames(index, last=false){
            let classname = []
 
-           if(d_phase >= index){
+           if(last && errors){
+               classname.push('');
+           }
+           else if(d_phase >= index){
                
                classname.push(error_index === index ? 'error':'active')
            }
@@ -220,7 +226,7 @@ const RegistrationForm = ({register}) => {
                         <strong>Quiz Setup</strong></li>
 
                 <li 
-                    className={getClassNames(4)}
+                    className={getClassNames(4, true)}
                     id="sm">
                     <strong>Summary</strong></li>
             </ul>
@@ -276,12 +282,16 @@ const RegistrationForm = ({register}) => {
             d_phase = 1
         }
         else if(d_phase > state.steps.length){
-            return (
-                <>
-                   {renderSummary()}
-                </>
-                
-            )
+            if(!state.err){
+                return (
+                    <>
+                    {renderSummary()}
+                    </>
+                    
+                )
+            }
+
+            d_phase = state.steps.length;
         }
 
         let step = state.steps[d_phase - 1];
@@ -360,7 +370,7 @@ const RegistrationForm = ({register}) => {
                 </>
             )
         }
-        else if(current > 1 && current <= max){
+        else if((current > 1 && current <= max) || state.err){
             template = (
                 <>
                     {previous}
