@@ -455,17 +455,18 @@ form {
                 clip-path: circle(90% at 0% 0%) !important;
                 // transform: translate(-55%, -50%);
             }
-            // .panels_container {
-            //     transform: translateX(0%);
-            //     .left_panel {
-            //         display: block;
-            //         // .content {
-            //         //     transform: translateX(0%);
-            //         // }
-            //     }
-            // }
+            .panels_container {
+                border-radius: 0% 0 0 0;
+                padding: 0% 0;
+                .panel {
+                    &.left_panel {
+                        img {
+                            width: 100px !important;
+                        }
+                    }
+                }
+            }
         }
-        // overflow: hidden;
     }
     .form_container {
         position: relative;
@@ -474,10 +475,11 @@ form {
         height: 100vh;
         .sign_in_form {
             position: relative;
-            width: 97%;
+            max-width: 97%;
             // top: 50%;
+            margin: 2px auto;
             left: 0%;
-            transform: translate(0%, -20%);
+            transform: translate(0%, 0%);
             transition: 1s 0.7s ease-in-out;
             display: grid;
             grid-template-columns: 1fr;
@@ -571,6 +573,18 @@ form {
             }
         }
     }
+    // .app_container {
+    //     &.login {
+    //         border-radius: 0% 0 0 0;
+    //         .panels_container {
+    //             .panel {
+    //                 &.right_panel {
+    //                     padding: 20% 0% 0 0%;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 @media (max-width:299px) {
