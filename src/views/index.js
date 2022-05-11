@@ -6,7 +6,7 @@ import Registration from './registration'
 const Views = ({switchMode,loggedIn, authData}) => {
     // console.log(authData)
     return (
-        <div className="form_container">
+        <>
             {
                 !loggedIn ?
                 <Login switchMode={switchMode}/>
@@ -18,7 +18,7 @@ const Views = ({switchMode,loggedIn, authData}) => {
                 
             }
             
-        </div>
+        </>
     );
 };
 

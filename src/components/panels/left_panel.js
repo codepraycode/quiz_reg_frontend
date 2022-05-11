@@ -5,9 +5,11 @@ const LeftPanel = () => {
         <>
         <div className="panel left_panel">
             <div className="content">
-                <div className="image_container">
+                {/* <div className="image_container">
                 <img src="/assets/img/rccg.png" alt="Redeemed Christian Church Of God"/>
-                </div>
+                </div> */}
+                <img src="/assets/img/rccg.png" alt="Redeemed Christian Church Of God"/>
+                
                 <h3>An Header here</h3>
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid

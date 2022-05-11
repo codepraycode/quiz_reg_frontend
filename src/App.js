@@ -12,7 +12,7 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
   const initialState = {
-    loggedIn: true,//cookies.auth ? true : false,
+    loggedIn: false,//cookies.auth ? true : false,
     authData:null
   }
   
@@ -46,12 +46,13 @@ function App() {
 
     
   }
-  
 
-  return (
+  //  
+  
+  return (//${!state.loggedIn ? 'login':''}
     <CustomErrorBoundary>
-      <div className={`app_container ${!state.loggedIn ? 'sign_in_mode':''}`}>
-        <div className="forms_container">
+      <div className={`app_container login`}>
+        <div className="form_container">
           <Views switchMode={SwitchMode} {...state}/>
         </div>
 

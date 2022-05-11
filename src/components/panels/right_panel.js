@@ -15,10 +15,12 @@ const RightPanel = ({signOut}) => {
                     </button>
                 </div>
 
+                <img src="/assets/img/rccg.png" className="image" alt="" />
 
-                <div className="image_container">
+
+                {/* <div className="image_container">
                     <img src="/assets/img/rccg.png" className="image" alt="" />
-                </div>
+                </div> */}
             
                 
             </div>

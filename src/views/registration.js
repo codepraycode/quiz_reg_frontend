@@ -39,7 +39,7 @@ const Registration = (props) => {
 
                 let { response } = err;
 
-                console.log(response)
+                
 
                 if (response.status === 401) {
                     let { data } = response;
@@ -170,7 +170,6 @@ const Registration = (props) => {
 
        })
        .catch(err=>{
-        //  console.log("Participant Data",err)
          cb({message:err});
          return
        })

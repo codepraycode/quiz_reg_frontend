@@ -57,7 +57,7 @@ const LoginForm = (props) => {
     }
 
     return (
-        <form className="sign_in_form" onSubmit={handleSubmit}>
+        <form className="sign_in_form card" onSubmit={handleSubmit}>
                 <h2 className="title"> Region Sign in</h2>
                 <span className="err text-danger">{state.err}</span>
 
