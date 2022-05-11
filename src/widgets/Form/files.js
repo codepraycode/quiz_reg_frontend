@@ -1,91 +1,114 @@
-import React,{createRef} from 'react';
+import React, { createRef } from 'react';
 import {
-  
-  FormGroup,
-  Input,
-  FormText,
-  
-} from "reactstrap";
-import {reprTxt} from "../utils";
 
-const ImageUpload = ({inputhandler,...config})=>{
+    FormGroup,
+    Input,
+    FormText,
+
+} from "reactstrap";
+import { parseTxt } from "../../utils";
+
+const ImageUpload = ({ inputhandler, ...config }) => {
     // let {type,url, ...rest} = config;
-    let {name,key,err,url} = config;
-    // let verbose = reprTxt(name,'_');
+    let { name, key, err, url } = config;
+    // let verbose = parseTxt(name,'_');
 
     const imgInput = createRef();
-    
-     let template = (
-        <div className="file_upload center" key={key}>
 
-            <div className="image_upload">
-                <div className="image">
-                    <img 
-                        src={url}
-                        alt="preview" 
-                        className='img-rounded'
-                        onError={({ currentTarget }) => {
-                            currentTarget.onerror = null; // prevents looping
-                            currentTarget.src="/assets/img/user.jpg";
-                        }}
-                    />
-                </div>
+    let template = ( <
+        div className = "file_upload center"
+        key = { key } >
 
-                <input name={name} onChange={inputhandler} accept=".jpg, .png, .jpeg" type="file" ref={imgInput} />
+        <
+        div className = "image_upload" >
+        <
+        div className = "image" >
+        <
+        img src = { url }
+        alt = "preview"
+        className = 'img-rounded'
+        onError = {
+            ({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "/assets/img/user.jpg";
+            }
+        }
+        /> <
+        /div>
 
-                <span onClick={()=>{imgInput.current.click()}}><i className="fas fa-solid fa-pen"></i></span>
-            </div>
+        <
+        input name = { name }
+        onChange = { inputhandler }
+        accept = ".jpg, .png, .jpeg"
+        type = "file"
+        ref = { imgInput }
+        />
 
-            <span className="err text-danger">{err}</span>
+        <
+        span onClick = {
+            () => { imgInput.current.click() } } > < i className = "fas fa-solid fa-pen" > < /i></span >
+        <
+        /div>
 
-            
-        </div>
+        <
+        span className = "err text-danger" > { err } < /span>
+
+
+        <
+        /div>
     )
 
     return template;
 
 }
 
-const FileUpload = ({inputhandler,...config})=>{
+const FileUpload = ({ inputhandler, ...config }) => {
     // let {type,url, ...rest} = config;
-    let {name,err,key} = config;
-    let verbose = reprTxt(name,'_');
-    
-     let template = (
-        <div className="file_upload" key={config.key}>
+    let { name, err, key } = config;
+    let verbose = parseTxt(name, '_');
 
-            <div className="file">
-                <FormGroup key={key}>
-                    <label htmlFor={`${name}Input`}>{verbose}</label>
-                    
-                    <Input
-                        name={name}
-                        type="file"
-                        className="form-control-lg"
-                        id={name}
-                        onChange={inputhandler}
-                    />
+    let template = ( <
+        div className = "file_upload"
+        key = { config.key } >
 
-                    <FormText className="ml-2 text-danger err" color="default" >
-                        {err}
-                    </FormText>
+        <
+        div className = "file" >
+        <
+        FormGroup key = { key } >
+        <
+        label htmlFor = { `${name}Input` } > { verbose } < /label>
 
-                </FormGroup>
-            </div>
+        <
+        Input name = { name }
+        type = "file"
+        className = "form-control-lg"
+        id = { name }
+        onChange = { inputhandler }
+        />
 
-            
-        </div>
+        <
+        FormText className = "ml-2 text-danger err"
+        color = "default" > { err } <
+        /FormText>
+
+        <
+        /FormGroup> <
+        /div>
+
+
+        <
+        /div>
     )
 
     return template;
 
 }
 
-const fileWidget = (kind, config)=>{
-    if(kind === 'image'){
+const fileWidget = (kind, config) => {
+    if (kind === 'image') {
         return ImageUpload(config);
     }
-    
+
 
     return FileUpload(config);
 };

@@ -3,7 +3,12 @@ const URL = process.env.REACT_APP_SERVER_URL;
 const REGION_LOGIN = `${URL}/api/region/login`;
 const REGISTER = `${URL}/api/participant/create`;
 const PARTICIPANT = `${URL}/api/participant`;
+const PROVINCES = `${URL}/api/province`;
+const CATEGORIES = `${URL}/api/participant/categories`;
 
+const getFileUploadURl = (id) => {
+    return `${PARTICIPANT}/${id}/upload`
+}
 
 // Inputs
 const participants_data = {
@@ -96,16 +101,14 @@ const participants_data_config = {
     },
     region: {
         type: 'text',
-
         required: true,
         readOnly: true
     },
     province: {
         type: 'select',
-
         options: ['one'],
         required: true,
-        fetchUrl: ''
+        fetchUrl: PROVINCES
     },
     zone: {
         type: 'text',
@@ -124,17 +127,15 @@ const participants_data_config = {
     },
     participant_category: {
         type: 'select',
-
-        options: ['one'],
+        options: [],
         required: true,
-        fetchUrl: ''
+        fetchUrl: CATEGORIES
     },
     quiz_category: {
         type: 'select',
-
-        options: ['one'],
+        options: [],
         required: true,
-        fetchUrl: ''
+        fetchUrl: `${CATEGORIES}/quiz`
     },
     birth_certificate: {
         type: 'file',
@@ -159,10 +160,13 @@ const participants_data_config = {
         required: true,
     },
 }
+
+
 module.exports = {
     REGION_LOGIN,
     participants_data,
     participants_data_config,
     REGISTER,
-    PARTICIPANT
+    PARTICIPANT,
+    getFileUploadURl
 }

@@ -1,19 +1,21 @@
+
 import React from 'react';
 import {
-  
   FormGroup,
   Input,
   Label,
   FormText
-  
 } from "reactstrap";
-import { reprTxt } from '../utils';
+import { parseTxt } from '../../utils';
+
+// import axios from 'axios';
+
 
 const RadioBox = ({inputhandler,...config})=>{
     // let {type,url, ...rest} = config;
     
     let {name,err,key,options} = config;
-    let verbose = reprTxt(name,'_');
+    let verbose = parseTxt(name,'_');
 
     let template = [] 
     
@@ -53,7 +55,7 @@ const CheckBox = ({inputhandler,...config})=>{
     // let {type,url, ...rest} = config;
     
     let {name,value, options, err,key,} = config;
-    let verbose = reprTxt(name,'_');
+    let verbose = parseTxt(name,'_');
 
     let template = [] 
     
@@ -95,22 +97,38 @@ const CheckBox = ({inputhandler,...config})=>{
 
 
 
-const Selelction = ({inputhandler,...config})=>{
-    // let {type,url, ...rest} = config;
-    
+const Selelction = ({inputhandler,cookies,...config})=>{
+  
     let {name,value, options, err,key,} = config;
-    let verbose = reprTxt(name,'_');
+
+    let mapper = {}
+
+    let verbose = parseTxt(name,'_');
 
     let template_options = options.map((each, i)=>{
-            return (
-                
-                   
-    <option key={i}>{each}</option>
-                
-            )
-        });
+        let val;
 
-    
+        if(each instanceof Object){
+            let {_id:id, name} = each;
+            mapper[name] = id
+
+            val = parseTxt(name,'_')
+
+            // return (   
+            //     <option key={i}>{name}</option>
+            // )
+        }else{
+            val = parseTxt(each,'_')
+        }
+
+         
+
+        return (   
+            <option key={i}>{val}</option>
+        )
+    });
+
+        
     
     let template =  <Input
                     className="form-control-lg" 
@@ -124,7 +142,7 @@ const Selelction = ({inputhandler,...config})=>{
                     <option key="-1283">----</option>
                     {template_options}
                 </Input>
-    
+        
 
     return (
         <FormGroup key={key} >
@@ -138,6 +156,9 @@ const Selelction = ({inputhandler,...config})=>{
     );
 
 }
+
+
+
 const selectWidget = (kind, config)=>{
     if(kind === 'radio'){
         return RadioBox(config);

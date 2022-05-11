@@ -1,10 +1,15 @@
+import axios from 'axios';
 import React,{useState} from 'react';
+import { useCookies } from 'react-cookie';
 import {
   Form,
 } from "reactstrap";
-import { participants_data_config,participants_data } from '../../config';
+import { participants_data_config,participants_data} from '../../config';
 import ButtonW from '../../widgets/buttons';
 import FormIt from '../../widgets/Form';
+
+import { rev_parseTxt } from '../../utils';
+
     /* 
         step 1:
             - passport
@@ -43,15 +48,86 @@ const RegistrationForm = ({register}) => {
             ['region','province','zone','area','parish'],
             ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
         ],
-        current_phase:1
+        current_phase:1,
+        loaded:false
     }
 
+    const [cookies] = useCookies(['auth']);
     const [state,setState] = useState({
         ...initialState,
         loading:false,
         err:null // error will be an object of field to value
         // server will return a field to value error
     });
+
+
+    const fetchOptions = ()=>{
+        let fetches = [];
+
+        const request_config = {
+            method:'get',
+            headers: { 
+                'Content-Type': 'application/json',
+                'x-access-token': cookies.auth
+            },
+        }
+
+        Object.entries(state.form_config).forEach(([field,config])=>{
+            if(config.type !== 'select') return
+
+
+            request_config.url = config.fetchUrl
+
+            fetches.push(
+                new Promise((resolved,rejected)=>{
+                    // let res = {}
+                    axios(request_config)
+                    .then(({data})=>{
+                        //res[field] = data
+                        resolved({
+                            field,
+                            data
+                        })
+                        return;
+                    })
+                    .catch(err=>{
+                        rejected(err);
+                        return
+                    })
+                })
+            )
+
+        });
+
+
+        Promise.all(fetches).then(pdata=>{
+            // console.log(pdata);
+            setState((prev_state)=>{
+                pdata.forEach(each=>{
+                    
+                    let {field,data:options_data} = each;
+
+                    if(Object.keys(prev_state.form_config).includes(field)){
+                        prev_state.form_config[field].options = [...options_data]
+                    }
+                    
+                });
+
+                return {...prev_state}
+            })
+
+
+            return;
+        }).catch(errs=>{
+            console.log(errs)
+            
+        })
+    }
+
+
+    useState(()=>{
+        fetchOptions()
+    },[]);
 
 
 
@@ -67,6 +143,7 @@ const RegistrationForm = ({register}) => {
         if(!formData[field_name]) return;
 
         let formConfig = state.form_config;//[field_name];
+        
         if(field_type === 'file'){
             
             let d_file = e.target.files[0];
@@ -118,22 +195,48 @@ const RegistrationForm = ({register}) => {
         else if(current_phase === max){
             const considered_files = ['passport','birth_certificate','letter_of_recommendation'];
 
-            let data = {} //new FormData()
-            let files_data = new FormData();
+            let {formData} = state;
 
-            Object.entries(state.formData).forEach(([field,config])=>{
-                // data[field] = config.value;
+            let data = {}
+            let form = new FormData();
+
+
+            Object.entries(formData).forEach(([field,config])=>{
+                let value = config.value;
+
                 if(considered_files.includes(field)){
-                    files_data.append(field, config.value);
-                }else{
-                    data[field] = config.value;
-                } 
+                    console.log(field)
+                    form.append(field, value);
+                    return
+                }
+                
+                if(state.form_config[field].options){
+                    for(let eop of state.form_config[field].options){
+                        if((eop instanceof Object)){
+                            let {_id,name} = eop;
+
+                            if(name === value){
+                                value = _id;
+                                field +='_id'
+                                break
+                            }
+                        }
+
+                        value = rev_parseTxt(value, '_');
+                        break;
+                    }
+                }
+                
+                data[field] = value;
+                
             });
 
             
             current_phase +=1
 
-            register(data,files_data,(err)=>{
+
+            register(data,form,(err)=>{
+
 
                 setState((prev_state)=>{
                         if(!err){
@@ -156,7 +259,7 @@ const RegistrationForm = ({register}) => {
                     
                 }
             )
-            // return;
+            return;
         }
 
         
@@ -304,7 +407,7 @@ const RegistrationForm = ({register}) => {
             let value = state.formData[each].value
             d_config.value = value;
 
-            return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event) })
+            return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event), cookies })
         })
 
         
@@ -393,7 +496,7 @@ const RegistrationForm = ({register}) => {
                 {template}
             </div>
         )
-    }
+    }    
 
     return (
         <div className="registration_form card px-0 pt-4 pb-0 mt-3 mb-3">

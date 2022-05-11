@@ -1,4 +1,4 @@
-function reprTxt(txt, splitBy = ' ') {
+function parseTxt(txt, splitBy = ' ') {
     if (!txt) return '';
 
     let repr = txt.split(splitBy); //txt;
@@ -19,6 +19,25 @@ function reprTxt(txt, splitBy = ' ') {
 }
 
 
+function rev_parseTxt(txt, splitedBy = ' ') {
+    if (!txt) return '';
+
+    let repr = txt.split(' '); //txt;
+
+    repr = repr.map(ech => {
+        return ech[0].toLowerCase() + ech.slice(1)
+    });
+
+    return repr.join(splitedBy);
+
+}
+
+
+
+
+
+
 module.exports = {
-    reprTxt
+    parseTxt,
+    rev_parseTxt
 }

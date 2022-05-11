@@ -1,34 +1,36 @@
 import React from 'react';
 import {
-  
-  FormGroup,
-  Input,
-  FormText,
-  
+
+    FormGroup,
+    Input,
+    FormText,
+
 } from "reactstrap";
-import {reprTxt} from "../utils";
+import { parseTxt } from "../../utils";
 
-const Dates = ({inputhandler,...config})=>{
-    let {name,err,key,ordinary,...rest} = config;
-    let verbose = reprTxt(name,'_');
+const Dates = ({ inputhandler, ...config }) => {
+    let { name, err, key, ordinary, ...rest } = config;
+    let verbose = parseTxt(name, '_');
 
-    let template = (
-        <FormGroup key={key}>
-            <label htmlFor={`${name}Input`}>{verbose}</label>
-            
-            <Input
-                name={name}
-                {...rest}
-                className="form-control-lg"
-                id={name}
-                onChange={inputhandler}
-            />
+    let template = ( <
+        FormGroup key = { key } >
+        <
+        label htmlFor = { `${name}Input` } > { verbose } < /label>
 
-            <FormText className="ml-2 text-danger err" color="default" >
-                {err}
-            </FormText>
+        <
+        Input name = { name } {...rest }
+        className = "form-control-lg"
+        id = { name }
+        onChange = { inputhandler }
+        />
 
-        </FormGroup>
+        <
+        FormText className = "ml-2 text-danger err"
+        color = "default" > { err } <
+        /FormText>
+
+        <
+        /FormGroup>
     )
 
 

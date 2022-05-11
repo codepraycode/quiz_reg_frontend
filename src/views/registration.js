@@ -1,106 +1,123 @@
 import React,{useEffect} from 'react';
 import RegistrationForm from '../components/forms/registration_form';
-import {REGISTER,PARTICIPANT} from '../config';
+import {REGISTER} from '../config';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
 const Registration = (props) => {
   const [cookies] = useCookies(['auth']);
 
-  
 
+  const makeRequest = (request_config) => {
+    return new Promise((resolved, rejected) => {
+        // console.log(request_config)
+        axios(request_config)
+            .then(response => {
 
-  const makeRequest = (request_config)=>{
-    return new Promise((resolved,rejected)=>{
-      axios(request_config)
-        .then(response=>{
-            
-            let {data} = response;
-            
-            if(!data.isAuth){
-              rejected(data.message);    
-              return
-            }
-            
-            resolved(data)
-            return
+                let { data } = response;
 
+                
 
-        })
-        .catch(err=>{
-            
-            if(err.code === 'ERR_NETWORK'){
-                //cb('Network Error, please connect to the internet');
-                rejected('Network Error, please connect to the internet')
+                // if (data.isAuth) {
+                //     rejected(data.message);
+                //     return
+                // }
+
+                resolved(data)
                 return
-            }
 
 
-            let {response} = err;
+            })
+            .catch(err => {
 
-            if(response.status === 401){
-                let {data} = response;
-                // cb(data.message);    
-                rejected(data.message)
-                return
-            }
-            // if(err.)
-            if(response.status === 400){
-                let {data} = response;
-                // cb(data.message);  
+                if (err.code === 'ERR_NETWORK') {
+                    //cb('Network Error, please connect to the internet');
+                    rejected('Network Error, please connect to the internet')
+                    return
+                }
+
+
+                let { response } = err;
+
+                console.log(response)
+
+                if (response.status === 401) {
+                    let { data } = response;
+                    // cb(data.message);    
+                    rejected(data)
+                    return
+                }
+                // if(err.)
+                if (response.status === 400) {
+                    let { data } = response;
+                    
+                    // cb(data.message);  
+                    // console.log(response)
+                    rejected(data)
+                    return
+                }
+
                 // console.log(response)
-                rejected(data.message)
+
+                // console.log(response)
+
+
+                // cb('Unable to Connect To Sever');
+                rejected({message:'Unable to Connect To Sever'});
+                // rejected(response.data);
                 return
-            }
-
-            // console.log(response)
 
 
-            // cb('Unable to Connect To Sever');
-            rejected('Unable to Connect To Sever');
-            return
-
-
-        });
+            });
     })
-    
-  }
-
-
-  const uploadFiles = (files)=>{
-    const request_config = {
-          method: 'post',
-          url: PARTICIPANT,
-          headers: { 
-              'Content-Type': 'multipart/form-data',
-              'Cookie': `auth=${cookies.auth}`
-          },
-          data : files
-      }
-
-
-      return new Promise((resolved, rejected)=>{
-        makeRequest(request_config)
-        .then(data=>{
-
-            if(!data.isAuth){
-              rejected(data.message);    
-              return
-            }
-
-            resolved(data)
-            return
-
-        })
-        .catch(err=>{
-          rejected({message:err});
-          return
-        })
-      })
-
-
 
   }
+
+
+  // const uploadFiles = (files, url)=>{
+  //   // files
+  //   const request_config = {
+  //         // method: 'post',
+  //         // url,
+  //         headers: { 
+  //             // 'Content-Type': 'multipart/form-data',
+  //             ...files.getHeaders(),
+  //             'x-access-token': cookies.auth
+  //         },
+  //         // data : files
+  //     }
+
+
+  //     return new Promise((resolved, rejected)=>{
+
+        
+  //       axios.post(url, files, request_config)
+  //       .then(response=>{
+  //         console.log(response);
+
+  //         let {data} = response;
+  //           // if(!data.isAuth){
+  //           //   rejected(data.message);    
+  //           //   return
+  //           // }
+
+  //           resolved(data)
+  //           return
+
+  //       })
+  //       .catch(err_re=>{
+
+  //         console.log(err_re)
+
+  //         let {data} = err_re
+  //         rejected(data);
+  //         return
+  //       })
+  //     })
+
+
+
+  // }
 
 
   const handleRegistration = (data, files=null, cb)=>{
@@ -110,51 +127,50 @@ const Registration = (props) => {
           url: REGISTER,
           headers: { 
               'Content-Type': 'application/json', 
-              // 'Content-Type': 'multipart/form-data',
-              // 'Cookie': `auth=${cookies.auth}`
+              'x-access-token': cookies.auth
           },
-          data : {
-            ...data,
-            token:cookies.auth
-          }
-          // {...data}
-          // {
-          //   ...data,
-          //   token:cookies.auth
-          // }
+          data
       }
 
-      //  console.log("Submitting Data", data);
+
+      
+      makeRequest(request_config)
+       .then((data)=>{
+
+          // console.log("Participant Data",data)
+
+          // let {_id:id} = data;
 
 
-       makeRequest(request_config)
-       .then(()=>{
-
+          cb(null);
+          
          
 
           // Uploading Files
 
          
-          if(!files){
-            cb(null);
-            return
-          }
+          // if(!files){
+          //   cb(null);
+          //   return
+          // }
 
-          uploadFiles(files)
-          .then(data=>{
-            cb(null);
-            return
-          })
-          .catch(err=>{
-            console.log("File Upload Error")
-            cb({message:err})
-            return
-          })
+          // uploadFiles(files, getFileUploadURl(id))
+          // .then(data=>{
+          //   console.log("New Data", data)
+          //   cb(null);
+          //   return
+          // })
+          // .catch(err=>{
+          //   console.log("File Upload Error")
+          //   cb(err)
+          //   return
+          // })
            
           
 
        })
        .catch(err=>{
+        //  console.log("Participant Data",err)
          cb({message:err});
          return
        })
