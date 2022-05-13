@@ -15,47 +15,48 @@ const ImageUpload = ({ inputhandler, ...config }) => {
 
     const imgInput = createRef();
 
-    let template = ( <
-        div className = "file_upload center"
-        key = { key } >
+    let template = ( 
+        <div 
+            className = "file_upload center"
+            key = { key } 
+        >
 
-        <
-        div className = "image_upload" >
-        <
-        div className = "image" >
-        <
-        img src = { url }
-        alt = "preview"
-        className = 'img-rounded'
-        onError = {
-            ({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "/assets/img/user.jpg";
-            }
-        }
-        /> <
-        /div>
+            <div className = "image_upload" >
+                <div className = "image" >
+                
+                    <img src = { url }
+                        alt = "preview"
+                        className = 'img-rounded'
+                        onError = {
+                            ({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = "/assets/img/user.jpg";
+                            }
+                        }
+                        /> 
+                </div>
 
-        <
-        input name = { name }
-        onChange = { inputhandler }
-        accept = ".jpg, .png, .jpeg"
-        type = "file"
-        ref = { imgInput }
-        />
+                <input 
+                    name = { name }
+                    onChange = { inputhandler }
+                    accept = ".jpg, .png, .jpeg"
+                    type = "file"
+                    ref = { imgInput }
+                />
 
-        <
-        span onClick = {
-            () => { imgInput.current.click() } } > < i className = "fas fa-solid fa-pen" > < /i></span >
-        <
-        /div>
+                <span 
+                    onClick = {
+                        () => { imgInput.current.click() } 
+                    } 
+                > 
+                    <i className = "fas fa-solid fa-pen" > </i>
+                </span >
+            </div>
 
-        <
-        span className = "err text-danger" > { err } < /span>
+            <span className = "err text-danger" > { err } </span>
 
 
-        <
-        /div>
+        </div>
     )
 
     return template;
@@ -67,37 +68,35 @@ const FileUpload = ({ inputhandler, ...config }) => {
     let { name, err, key } = config;
     let verbose = parseTxt(name, '_');
 
-    let template = ( <
-        div className = "file_upload"
-        key = { config.key } >
+    let template = ( 
+        <div 
+            className = "file_upload"
+            key = { config.key } 
+        >
 
-        <
-        div className = "file" >
-        <
-        FormGroup key = { key } >
-        <
-        label htmlFor = { `${name}Input` } > { verbose } < /label>
+            <div 
+                className = "file" >
+                <FormGroup key = { key } >
+                    <label htmlFor = { `${name}Input` } > { verbose } </label>
 
-        <
-        Input name = { name }
-        type = "file"
-        className = "form-control-lg"
-        id = { name }
-        onChange = { inputhandler }
-        />
+                    <Input 
+                        name = { name }
+                        type = "file"
+                        className = "form-control-lg"
+                        id = { name }
+                        onChange = { inputhandler }
+                    />
 
-        <
-        FormText className = "ml-2 text-danger err"
-        color = "default" > { err } <
-        /FormText>
+                    <FormText 
+                        className = "ml-2 text-danger err"
+                        color = "default" > { err } 
+                    </FormText>
 
-        <
-        /FormGroup> <
-        /div>
+                </FormGroup> 
+            </div>
 
 
-        <
-        /div>
+        </div>
     )
 
     return template;
