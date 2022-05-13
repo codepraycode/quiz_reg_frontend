@@ -12,7 +12,7 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
   const initialState = {
-    loggedIn: false,//cookies.auth ? true : false,
+    loggedIn: cookies.auth ? true : false,
     authData:null
   }
   
@@ -51,17 +51,50 @@ function App() {
   
   return (//${!state.loggedIn ? 'login':''}
     <CustomErrorBoundary>
-      <div className={`app_container login`}>
+      <div className={`app_container ${!state.loggedIn ? 'login':''}`}>
+        <div className="header">
+
+          <div className="content">
+            <img src="/assets/img/rccg.png" alt="Redeemed Christian Church Of God"/>
+
+            <h3>An Header here</h3>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid
+            </p>
+              
+          </div>
+
+        </div>
+          
         <div className="form_container">
           <Views switchMode={SwitchMode} {...state}/>
         </div>
 
-        <div className="panels_container">
+        <>
           <LeftPanel/>
           <RightPanel signOut={handleSignOut}/>
+        </>
+
+
+        <div className="footer">
+          <div className="content">
+              
+                <img src="/assets/img/rccg.png" className="image" alt="" />
+                <h3>Another Header here</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+              </p>
+
+              <button className="btn transparent" onClick={handleSignOut}>
+                  Sign Out
+                </button>
+          </div>
+
+            
+          </div>
         </div>
-      
-      </div>
+
+        
     </CustomErrorBoundary>
   );
 }
