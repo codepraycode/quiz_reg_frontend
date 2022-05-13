@@ -413,7 +413,7 @@ const RegistrationForm = ({register}) => {
         
         return(
             <Form onSubmit={handleSubmit}>
-            <fieldset className="card">
+            <fieldset className="">
                 {template_configs}
                 
             </fieldset>
@@ -510,7 +510,10 @@ const RegistrationForm = ({register}) => {
                 <>
                     {renderProgress()}
                 </>
+
+                <hr/>
             </div>
+            
             {renderFormContent()}
 
         </div>
