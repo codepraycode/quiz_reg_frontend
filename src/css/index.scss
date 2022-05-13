@@ -78,6 +78,18 @@ select {
     }
 }
 
+.age_bracket {
+    display: flex;
+    .info {
+        width: 35%;
+        background: whitesmoke;
+        border-left: transparent !important;
+        border-radius: 0 8px 8px 0 !important;
+        font-size: 11px;
+        text-align: center;
+    }
+}
+
 .btn {
     min-width: 100px;
     // background-color: #5995fd;

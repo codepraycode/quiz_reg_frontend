@@ -9,7 +9,8 @@ import {
 import { parseTxt } from "../../utils";
 
 const Dates = ({ inputhandler, ...config }) => {
-    let { name, err, key, ordinary, ...rest } = config;
+    
+    let { name, err, key, ordinary, type,value } = config;
     let verbose = parseTxt(name, '_');
 
     let template = ( 
@@ -17,12 +18,34 @@ const Dates = ({ inputhandler, ...config }) => {
         
             <label htmlFor = { `${name}Input` } > { verbose } </label>
 
-            <Input 
-                name = { name } {...rest }
-                className = "form-control-lg"
-                id = { name }
-                onChange = { inputhandler }
-            />
+
+            <div className="age_bracket">
+                <Input 
+                    type={type}
+                    name = { name } 
+                    value={value }
+                    className = "form-control-lg date"
+                    id = { name }
+                    onChange = { inputhandler }
+                />
+
+                {
+                    !ordinary ?
+                        <span 
+                            name = "age"
+                            className = "form-control-lg info"
+                            value = "30 years old"
+
+                            readOnly={true}
+
+                        >
+                            -- years old
+                        </span>
+                    :
+                    null
+                }
+                
+            </div>
 
             <FormText 
                 className = "ml-2 text-danger err"
