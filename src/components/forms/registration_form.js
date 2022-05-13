@@ -48,7 +48,7 @@ const RegistrationForm = ({register}) => {
             ['region','province','zone','area','parish'],
             ['participant_category','quiz_category','birth_certificate','letter_of_recommendation','regional_coordinator','provincial_coordinator']
         ],
-        current_phase:1,
+        current_phase:3,
         loaded:false
     }
 

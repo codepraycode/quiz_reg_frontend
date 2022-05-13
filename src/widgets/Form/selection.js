@@ -21,6 +21,7 @@ const RadioBox = ({inputhandler,...config})=>{
     
     if(options){
         template = options.map((each,i)=>{
+            let option = parseTxt(each,'_');
             return (
                 <FormGroup key={i} check className="form-check-radio" inline>
                     <Label check>
@@ -32,7 +33,7 @@ const RadioBox = ({inputhandler,...config})=>{
                             type="radio"
                             onChange={inputhandler}
                         />
-                        {each}
+                        {option}
                         <span className="form-check-sign"></span>
                     </Label>
                 </FormGroup>
@@ -41,9 +42,11 @@ const RadioBox = ({inputhandler,...config})=>{
     }
     
 
-    return <FormGroup key={key}>
+    return <FormGroup key={key} className="radios">
             <label>{verbose}</label><br/>
-            {template}
+            <div className="options">
+                {template}
+            </div>
             <FormText className="ml-2 text-danger err" color="default" >
                 {err}
             </FormText>
@@ -145,8 +148,9 @@ const Selelction = ({inputhandler,cookies,...config})=>{
         
 
     return (
-        <FormGroup key={key} >
-            <label>{verbose}</label>
+        <FormGroup key={key} className="selection">
+            
+            <label htmlFor = { `${name}` } > { verbose } </label>
 
             {template}
             <FormText className="ml-2 text-danger err" color="default" >

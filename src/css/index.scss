@@ -27,8 +27,59 @@ body {
     padding: 0;
 }
 
+input {
+    border-radius: 5px !important;
+}
+
+select {
+    width: 70%;
+    margin: 1px auto;
+    text-align: center;
+    background: transparent;
+    border: 1px solid $arsh;
+    option {
+        background: white;
+        color: grey;
+        border: 1px solid $arsh !important;
+    }
+}
+
+.selection {
+    display: flex;
+    justify-content: space-around !important;
+    align-items: center;
+    label,
+    select {
+        display: block;
+    }
+}
+
+.radios {
+    // background: red;
+    margin: 0px 0 20px 0 auto !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // background: red;
+    // font-size: 14px;
+    padding: 0;
+    label {
+        display: block;
+        margin: 0;
+    }
+    .options {
+        // background: green;
+        width: 70%;
+        margin-top: 0 !important;
+        display: flex;
+        // justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
 .btn {
-    min-width: 150px;
+    min-width: 100px;
     // background-color: #5995fd;
     border: 1px solid $green;
     outline: none;
@@ -52,6 +103,17 @@ body {
         height: 41px;
         font-weight: 600;
         font-size: 12px;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    button {
+        display: block;
+        margin: 10px 0 !important;
     }
 }
 
@@ -580,6 +642,28 @@ form {
 }
 
 @media (max-width:920px) {
+    .selection {
+        display: block;
+        select {
+            width: 100%;
+        }
+    }
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .radios {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        .options {
+            width: 100%;
+        }
+    }
     .panels_container {
         display: none;
     }

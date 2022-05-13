@@ -9,15 +9,16 @@ import {
 import { parseTxt } from "../../utils";
 
 const TextInput = ({ inputhandler, ...config }) => {
-    let { name, err, key, ...rest } = config;
+    let { name, err, key, value, } = config;
     let verbose = parseTxt(name, '_');
 
     let template = ( 
         <FormGroup key = { key } >
-            <label htmlFor = { `${name}Input` } > { verbose } </label>
+            <label htmlFor = { `${name}` } > { verbose } </label>
 
             <Input 
-                name = { name } {...rest }
+                name = { name } 
+                value = {value }
                 className = "form-control-lg"
                 id = { name }
                 onChange = { inputhandler }
