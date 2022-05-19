@@ -112,12 +112,6 @@ h6 {
     }
 }
 
-// .instruction,
-// .sign_in_form {
-//     height: 460px;
-//     width: 500px;
-//     max-width: 95%;
-// }
 .instruction {
     font-size: 13px;
     line-height: 29px;
@@ -147,6 +141,23 @@ label {
     display: block;
     text-align: center;
     font-weight: bold;
+}
+
+.form-control {
+    border: 1px solid $grey;
+    border-radius: 2px;
+    background: $light-accent;
+    color: $dark;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 18px 20px;
+    &:focus {
+        outline: none !important;
+        border: none !important;
+        // background: green;
+        box-shadow: 0 0px 0px 2px $dark;
+    }
 }
 
 .file_upload {
