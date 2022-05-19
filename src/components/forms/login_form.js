@@ -60,16 +60,17 @@ const LoginForm = (props) => {
         <div className="sign_in_form card">
             <div className="card_header">
                 <h3>Region Sign in</h3>
-                <span className="err text-danger">{state.err}</span>
+                
             </div>
             
             <form onSubmit={handleSubmit}>
-
                 <div className="card_body">
+                    <span className="error text-danger">{state.err}</span>
                     <div className="input_field">
                         <i className="fa fa-envelope" aria-hidden="true"></i>
                         <input 
                         type="email" 
+                        className='form-control'
                         placeholder="Region Email" 
                         value={state.email}
                         onChange={handleInputChange}
@@ -81,7 +82,7 @@ const LoginForm = (props) => {
                     
                     <div className="input_field">
                         <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" value={state.password}
+                        <input type="password" className='form-control' placeholder="Password" value={state.password}
                         onChange={handleInputChange} required={true}/>
                         
                     </div>
@@ -92,7 +93,7 @@ const LoginForm = (props) => {
                     <button 
                         type="submit" 
                         value="Login" 
-                        className="btn solid"
+                        className="btn success"
                         disabled={state.loading}
                     >
                         {state.loading ? 'Loading':'Login'}
