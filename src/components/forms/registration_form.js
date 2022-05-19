@@ -428,20 +428,23 @@ const RegistrationForm = ({register}) => {
     const renderButton =()=>{
         const previous = (
             <ButtonW
-                type="previous"
+                type="button"
                 func={()=>{setState((prev_state)=>{
                     prev_state.current_phase -= 1; 
                    
                     return {...prev_state}
                 })}}
                 disabled={state.loading}
+                text="Previous"
             />
             
         )
 
         const next_ = (
             <ButtonW 
-                type="next"
+                type="submit"
+                text="Next"
+                
             />
             
         )
@@ -449,16 +452,19 @@ const RegistrationForm = ({register}) => {
         const submit = (
             <ButtonW
                 type="submit"
+                text="Submit"
                 disable={state.loading}
+                className={"btn-success"}
             />
         )
         
         const refresh = (
             <ButtonW
-                type="refresh" 
+                text="refresh" 
                 func={()=>{
                     window.location.reload()
                 }}
+                className={"btn-success"}
             />
         )
 
@@ -505,7 +511,7 @@ const RegistrationForm = ({register}) => {
                     Registration
                 </h3>
 
-                <span className='error text-danger'>dasdas{renderError()}</span>
+                <span className='error text-danger'>{renderError()}</span>
                 <>
                     {renderProgress()}
                 </>

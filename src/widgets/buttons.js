@@ -1,82 +1,97 @@
 import React from 'react';
 import {
 
-  Button
+//   Button
 } from "reactstrap";
 
-const ButtonW = ({type, func, disable}) => {
+const ButtonW = ({func, text, className, disable, ...rest}) => {
 
     if(!(typeof func === 'function')){
         func = ()=>{}
     }
 
-    const previous = (
-        <Button 
-            color="primary" 
-            type="button" 
-            className="mr-5" 
+
+    return (
+        <button
             onClick={func}
             disabled={disable}
+            className={`${className || 'btn-primary'} btn mr-5`}
+            {...rest}
         >
-            Previous
-        </Button>    
+            {text || 'Continue'}
+        </button>
     )
+    // const previous = (
+    //     <Button 
+    //         color="primary" 
+    //         type="button" 
+            
+    //         onClick={func}
+    //         disabled={disable}
+    //     >
+    //         Previous
+    //     </Button>    
+    // )
 
-    const next_ = (
-        <Button color="primary" type="submit">
-                Next
-        </Button>
-    )
+    // const next_ = (
+    //     <Button 
+    //         color="primary" 
+    //         type="submit"
+    //         className={`${className} mr-5`}
+    //     >
+    //             Next
+    //     </Button>
+    // )
 
-    const submit = (
-        <Button 
-            color="primary" 
-            type="submit"
-            disabled={disable}
-        >
-            {disable ? 'Processing...' :'Submit'}
-        </Button>
-    )
+    // const submit = (
+    //     <Button 
+    //         color="primary" 
+    //         type="submit"
+    //         disabled={disable}
+    //     >
+    //         {disable ? 'Processing...' :'Submit'}
+    //     </Button>
+    // )
         
-    const refresh = (
-        <Button 
-            color="primary" 
-            type="button" 
-            onClick={()=>{
-                window.location.reload()
-            }}
-        >
-            New Participant
-        </Button>
-    )
+    // const refresh = (
+    //     <Button 
+    //         color="primary" 
+    //         type="button" 
+    //         onClick={()=>{
+    //             window.location.reload()
+    //         }}
+    //     >
+    //         New Participant
+    //     </Button>
+    // )
 
 
-    const renderButton = () =>{
-        let template = null;
+    // const renderButton = () =>{
+    //     let template = null;
 
-        switch (type){
-            case 'previous':
-                template = previous;
-                break;
-            case 'next':
-                template = next_;
-                break;
-            case 'submit':
-                template = submit;
-                break;
-            case 'refresh':
-                template = refresh;
-                break;
-            default:
-              template = null  
-        }
-
-
-        return template
-    }
+    //     switch (type){
+    //         case 'previous':
+    //             template = previous;
+    //             break;
+    //         case 'next':
+    //             template = next_;
+    //             break;
+    //         case 'submit':
+    //             template = submit;
+    //             break;
+    //         case 'refresh':
+    //             template = refresh;
+    //             break;
+    //         default:
+    //           template = null  
+    //     }
 
 
-    return renderButton()
+    //     return template
+    // }
+
+
+    // return renderButton()
 };
 
 export default ButtonW;
