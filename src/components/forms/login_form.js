@@ -60,7 +60,6 @@ const LoginForm = (props) => {
         <div className="sign_in_form card">
             <div className="card_header">
                 <h3>Region Sign in</h3>
-                
             </div>
             
             <form onSubmit={handleSubmit}>

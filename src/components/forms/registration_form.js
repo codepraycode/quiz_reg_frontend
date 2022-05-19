@@ -339,7 +339,7 @@ const RegistrationForm = ({register}) => {
    const renderSummary = ()=>{
        return(
            <>
-                <div className="success card">
+                <div className="card">
                     <h2>Participant Registration Successful</h2>
                     <span className="check">
                         <i className="fa fa-check-circle" aria-hidden="true"></i>
@@ -413,12 +413,12 @@ const RegistrationForm = ({register}) => {
         
         return(
             <Form onSubmit={handleSubmit}>
-            <fieldset className="">
-                {template_configs}
-                
-            </fieldset>
+                <fieldset className="">
+                    {template_configs}
+                    
+                </fieldset>
 
-            {
+                {
                     renderButton()
                 }
             </Form>
@@ -499,22 +499,29 @@ const RegistrationForm = ({register}) => {
     }    
 
     return (
-        <div className="registration_form card px-0 pt-4 pb-0 mt-3 mb-3">
-            <div className="form_head">
-                <h2 className="title">
+        <div className="registration_form card">
+            <div className="card_header">
+                <h3 className="title">
                     Registration
-                </h2>
+                </h3>
 
-                <span className='err text-danger'>{renderError()}</span>
-                    
+                <span className='error text-danger'>dasdas{renderError()}</span>
                 <>
                     {renderProgress()}
                 </>
+            </div>
 
-                <hr/>
+
+            <div className="card_body">
+                
+
+
+                {renderFormContent()}
+
             </div>
             
-            {renderFormContent()}
+
+            
 
         </div>
         
