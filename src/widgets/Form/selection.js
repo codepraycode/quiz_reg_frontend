@@ -27,11 +27,12 @@ const RadioBox = ({inputhandler,...config})=>{
                     <Label check>
                         <Input
                             // defaultValue="option1"
-                            id={name}
+                            // id={name}
                             name={name}
                             value={each}
                             type="radio"
                             onChange={inputhandler}
+                            className="form-control"
                         />
                         {option}
                         <span className="form-check-sign"></span>
@@ -43,10 +44,12 @@ const RadioBox = ({inputhandler,...config})=>{
     
 
     return <FormGroup key={key} className="radios">
-            <label>{verbose}</label><br/>
+            <label>{verbose}</label>
+            
             <div className="options">
                 {template}
             </div>
+            
             <FormText className="ml-2 text-danger err" color="default" >
                 {err}
             </FormText>
@@ -134,13 +137,12 @@ const Selelction = ({inputhandler,cookies,...config})=>{
         
     
     let template =  <Input
-                    className="form-control-lg" 
+                    className="form-control-lg form-control" 
                     type="select"
                     id={name}
                     name={name}
                     value={value}
                     onChange={inputhandler}
-                    
                 >
                     <option key="-1283">----</option>
                     {template_options}

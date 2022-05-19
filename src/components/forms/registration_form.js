@@ -339,14 +339,14 @@ const RegistrationForm = ({register}) => {
    const renderSummary = ()=>{
        return(
            <>
-                <div className="card">
+                <div className="summary">
                     <h2>Participant Registration Successful</h2>
                     <span className="check">
                         <i className="fa fa-check-circle" aria-hidden="true"></i>
                     </span>
                     {
-                    renderButton()
-                }   
+                        renderButton()
+                    }
                 </div>
 
                 
