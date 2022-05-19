@@ -57,40 +57,51 @@ const LoginForm = (props) => {
     }
 
     return (
-        <form className="sign_in_form card" onSubmit={handleSubmit}>
-                <h2 className="title"> Region Sign in</h2>
+        <div className="sign_in_form card">
+            <div className="card_header">
+                <h3>Region Sign in</h3>
                 <span className="err text-danger">{state.err}</span>
+            </div>
+            
+            <form onSubmit={handleSubmit}>
 
-                <div className="input_field">
-                    <i className="fa fa-envelope" aria-hidden="true"></i>
-                    <input 
-                    type="email" 
-                    placeholder="Region Email" 
-                    value={state.email}
-                    onChange={handleInputChange}
-                    required={true}
-                    />
+                <div className="card_body">
+                    <div className="input_field">
+                        <i className="fa fa-envelope" aria-hidden="true"></i>
+                        <input 
+                        type="email" 
+                        placeholder="Region Email" 
+                        value={state.email}
+                        onChange={handleInputChange}
+                        required={true}
+                        />
+                        
+                    </div>
                     
-                </div>
-                
-                
-                <div className="input_field">
-                    <i className="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" value={state.password}
-                    onChange={handleInputChange} required={true}/>
                     
+                    <div className="input_field">
+                        <i className="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" value={state.password}
+                        onChange={handleInputChange} required={true}/>
+                        
+                    </div>
                 </div>
-                
-                <button 
-                    type="submit" 
-                    value="Login" 
-                    className="btn solid"
-                    disabled={state.loading}
-                >
-                    {state.loading ? 'Loading':'Login'}
-                </button>
-                
+
+
+                <div className="card_footer">
+                    <button 
+                        type="submit" 
+                        value="Login" 
+                        className="btn solid"
+                        disabled={state.loading}
+                    >
+                        {state.loading ? 'Loading':'Login'}
+                    </button>
+                </div>
+        
             </form>
+        </div>
+       
         
         
     );

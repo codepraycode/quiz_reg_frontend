@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import LoginForm from '../components/forms/login_form';
 import {REGION_LOGIN} from '../config';
 import axios from 'axios';
-
+import Instruction from '../components/instruction';
 
 const Login = (props) => {
     
@@ -70,6 +70,8 @@ const Login = (props) => {
 
     return (
         <>
+            <Instruction/>
+            
             <LoginForm {...props}  login={handleLogin}/>
         </>
     );
