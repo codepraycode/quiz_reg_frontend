@@ -118,13 +118,21 @@ h6 {
     .header {
         max-height: 430px;
         margin: 15px 0;
+        text-align: center;
+        h2 {
+            font-weight: 700;
+        }
+        p {
+            font-size: 13px;
+            font-weight: 600;
+        }
         img {
             width: 100px;
             height: auto;
         }
     }
     .app_content {
-        margin-top: 20px;
+        margin-top: 17px;
         display: flex;
         align-items: center;
         &>div {

@@ -54,6 +54,9 @@ function App() {
 
         <div className="header">
           <img src='assets/img/rccg.png' alt="RCCG"/>
+
+          <h2>RCCG JUNIOR CHURCH</h2>
+          <p>Annual Competition Registration</p>
         </div>
           
         <div className='app_content'>
