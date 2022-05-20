@@ -25,9 +25,9 @@ const Instruction = () => {
                 <p className="help">
                 Need help?
                 <br/>
-                SMS/Call: -----, or 
+                SMS/Call: +234 806 592 2076, +234 802 353 7575, +234 805 614 5030, +234 815 1738 493
                 <br/>
-                Email: competition@rccgjuniorchurch.org.ng
+                or Email: competition@rccgjuniorchurch.org.ng
                 </p>
             </div>
 
