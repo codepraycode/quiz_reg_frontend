@@ -59,7 +59,7 @@ const LoginForm = (props) => {
     return (
         <div className="sign_in_form card">
             <div className="card_header">
-                <h3>Region Sign in</h3>
+                <h3>Sign In To Register</h3>
             </div>
             
             <form onSubmit={handleSubmit}>
@@ -70,7 +70,7 @@ const LoginForm = (props) => {
                         <input 
                         type="email" 
                         className='form-control'
-                        placeholder="Region Email" 
+                        placeholder="Regional Email Address" 
                         value={state.email}
                         onChange={handleInputChange}
                         required={true}

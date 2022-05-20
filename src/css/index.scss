@@ -192,6 +192,10 @@ label {
     font-weight: bold;
     line-height: 16px;
     padding: 18px 5px 18px 20px;
+    &::placeholder {
+        font-weight: 300;
+        font-size: 12px;
+    }
     &:focus {
         box-shadow: 0 0px 0px 1px $dark;
     }
