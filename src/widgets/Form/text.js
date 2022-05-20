@@ -9,7 +9,7 @@ import {
 import { parseTxt } from "../../utils";
 
 const TextInput = ({ inputhandler, ...config }) => {
-    let { name, err, key, value, } = config;
+    let { name, err, key, value, readOnly,required} = config;
     let verbose = parseTxt(name, '_');
 
     let template = ( 
@@ -22,6 +22,8 @@ const TextInput = ({ inputhandler, ...config }) => {
                 className = "form-control-lg"
                 id = { name }
                 onChange = { inputhandler }
+                required={required}
+                readOnly={readOnly || false}
             />
 
             <FormText 

@@ -10,7 +10,7 @@ import { parseTxt } from "../../utils";
 
 const Dates = ({ inputhandler, ...config }) => {
     
-    let { name, err, key, ordinary, type,value } = config;
+    let { name, err, key, ordinary, type,value,required } = config;
     let verbose = parseTxt(name, '_');
 
     let template = ( 
@@ -27,6 +27,7 @@ const Dates = ({ inputhandler, ...config }) => {
                     className = "form-control-lg date"
                     id = { name }
                     onChange = { inputhandler }
+                    required={required}
                 />
 
                 {

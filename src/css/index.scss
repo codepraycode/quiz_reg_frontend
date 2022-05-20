@@ -208,6 +208,15 @@ label {
         width: 150px;
         input {
             display: none;
+            &:invalid {
+                &~span {
+                    background: $danger;
+                    color: $white;
+                }
+                &~.image {
+                    border-color: $danger;
+                }
+            }
         }
         .image {
             width: 100%;
@@ -218,11 +227,19 @@ label {
             align-items: center;
             background: transparent;
             overflow: hidden;
+            padding: 2px;
             img {
                 width: 100%;
                 height: auto;
-                // border-radius: 50%;
+                border-radius: 10%;
                 z-index: 3;
+            }
+            &.danger {
+                border-color: $danger;
+                &~span {
+                    background: $danger;
+                    color: $white;
+                }
             }
         }
         span {

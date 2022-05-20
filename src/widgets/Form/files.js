@@ -10,7 +10,7 @@ import { parseTxt } from "../../utils";
 
 const ImageUpload = ({ inputhandler, ...config }) => {
     // let {type,url, ...rest} = config;
-    let { name, key, err, url } = config;
+    let { name, key, err, url, required} = config;
     // let verbose = parseTxt(name,'_');
 
     const imgInput = createRef();
@@ -22,6 +22,15 @@ const ImageUpload = ({ inputhandler, ...config }) => {
         >
 
             <div className = "image_upload" >
+                <input 
+                    name = { name }
+                    onChange = { inputhandler }
+                    accept = ".jpg, .png, .jpeg"
+                    type = "file"
+                    ref = { imgInput }
+                    id="img_input"
+                    required={required}
+                />
                 <div className = "image" >
                 
                     <img src = { url }
@@ -36,13 +45,7 @@ const ImageUpload = ({ inputhandler, ...config }) => {
                         /> 
                 </div>
 
-                <input 
-                    name = { name }
-                    onChange = { inputhandler }
-                    accept = ".jpg, .png, .jpeg"
-                    type = "file"
-                    ref = { imgInput }
-                />
+                
 
                 <span 
                     onClick = {
@@ -65,7 +68,7 @@ const ImageUpload = ({ inputhandler, ...config }) => {
 
 const FileUpload = ({ inputhandler, ...config }) => {
     // let {type,url, ...rest} = config;
-    let { name, err, key } = config;
+    let { name, err, key, required } = config;
     let verbose = parseTxt(name, '_');
 
     let template = ( 
@@ -85,6 +88,7 @@ const FileUpload = ({ inputhandler, ...config }) => {
                         className = "form-control-lg"
                         id = { name }
                         onChange = { inputhandler }
+                        required={required}
                     />
 
                     <FormText 

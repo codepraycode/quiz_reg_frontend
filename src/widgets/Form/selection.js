@@ -14,7 +14,7 @@ import { parseTxt } from '../../utils';
 const RadioBox = ({inputhandler,...config})=>{
     // let {type,url, ...rest} = config;
     
-    let {name,err,key,options} = config;
+    let {name,err,key,options, required} = config;
     let verbose = parseTxt(name,'_');
 
     let template = [] 
@@ -33,6 +33,7 @@ const RadioBox = ({inputhandler,...config})=>{
                             type="radio"
                             onChange={inputhandler}
                             className="form-control"
+                            required={required}
                         />
                         {option}
                         <span className="form-check-sign"></span>
@@ -78,7 +79,8 @@ const CheckBox = ({inputhandler,...config})=>{
                             type="checkbox"
                             onChange={inputhandler}
                         ></Input>
-                        {each}{" "}
+                            {each}{" "}
+                        
                         <span className="form-check-sign">
                             <span className="check"></span>
                         </span>
@@ -103,9 +105,9 @@ const CheckBox = ({inputhandler,...config})=>{
 
 
 
-const Selelction = ({inputhandler,cookies,...config})=>{
+const Selelction = ({inputhandler,...config})=>{
   
-    let {name,value, options, err,key,} = config;
+    let {name,value, options, err,key,required} = config;
 
     let mapper = {}
 
@@ -136,17 +138,18 @@ const Selelction = ({inputhandler,cookies,...config})=>{
 
         
     
-    let template =  <Input
+    let template =  <select
                     className="form-control-lg form-control" 
-                    type="select"
+                    // type="select"
                     id={name}
                     name={name}
                     value={value}
                     onChange={inputhandler}
+                    required={required}
                 >
                     <option key="-1283">----</option>
                     {template_options}
-                </Input>
+                </select>
         
 
     return (

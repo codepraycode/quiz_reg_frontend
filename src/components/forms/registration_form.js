@@ -407,7 +407,7 @@ const RegistrationForm = ({register}) => {
             let value = state.formData[each].value
             d_config.value = value;
 
-            return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event), cookies })
+            return FormIt({name:each, ...d_config, key, inputhandler: (event)=>handleInput(event), auth:cookies.auth })
         })
 
         
