@@ -60,7 +60,7 @@ function App() {
           </div>
 
           <h2>RCCG JUNIOR CHURCH</h2>
-          <p>Annual Competition Registration</p>
+          <p>Annual Competition Registrations</p>
         </div>
           
         <div className='app_content'>
