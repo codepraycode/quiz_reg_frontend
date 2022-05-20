@@ -9,17 +9,17 @@ const Instruction = () => {
             </div>
 
             <div className="card_body">
-                <p className="text-center text-muted">
-                    Instructions Not Yet Set
+                <p className="text-muted">
+                    Hello! This is a new Junior Church Competition Registration System for you. It is user friendly. The platform ensures a seamless registration. You can register for the quiz, song ministration, debate, essay writing, recitation, spelling Bee, other activities( drama, song and others), Zonal Presentation and upload participant's documents, register your courses, and manage your region results with more flexibilities than before. Provide your region email and password to access your account. Your Password would be communicated to you via your region dedicated email.
                 </p>
 
 
                 <p className="help">
                 Need help?
                 <br/>
-                SMS/Call -----
-                
-                or Email -----
+                SMS/Call: -----, or 
+                <br/>
+                Email: competition@rccgjuniorchurch.org.ng
                 </p>
             </div>
 
