@@ -38,6 +38,17 @@ h6 {
     padding: 0 !important;
 }
 
+a {
+    color: $dark;
+    font-weight: 400;
+    text-decoration: underline;
+    &:visited,
+    &:active,
+    &:hover {
+        color: $dark;
+    }
+}
+
 .btn {
     display: block;
     min-width: 150px;
