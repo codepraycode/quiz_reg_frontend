@@ -92,7 +92,7 @@ const LoginForm = (props) => {
                     <button 
                         type="submit" 
                         value="Login" 
-                        className="btn success"
+                        className="btn btn-success"
                         disabled={state.loading}
                     >
                         {state.loading ? 'Loading':'Login'}
