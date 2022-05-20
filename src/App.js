@@ -53,7 +53,11 @@ function App() {
       <div className={`app_container`}>
 
         <div className="header">
-          <img src='assets/img/rccg.png' alt="RCCG"/>
+
+          <div className="imgs">
+            <img src='assets/img/dtce.png' alt="RCCG"/>
+            <img src='assets/img/rccg_70.png' alt="RCCG"/>
+          </div>
 
           <h2>RCCG JUNIOR CHURCH</h2>
           <p>Annual Competition Registration</p>

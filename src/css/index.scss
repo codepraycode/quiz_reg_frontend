@@ -119,16 +119,20 @@ h6 {
         max-height: 430px;
         margin: 15px 0;
         text-align: center;
+        // background: grey;
+        // width: 90%;
         h2 {
             font-weight: 700;
+            font-size: 25px;
         }
         p {
             font-size: 13px;
             font-weight: 600;
         }
         img {
-            width: 100px;
+            width: 150px;
             height: auto;
+            margin: 0 10px;
         }
     }
     .app_content {
